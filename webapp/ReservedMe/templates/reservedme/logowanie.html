@@ -1,0 +1,28 @@
+{% extends "reservedme/base.html" %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 400px; background-color: white; padding: 50px; border-radius: 20px;">
+    <h2 class="mb-4 text-center">Zaloguj się</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="email" class="form-label">Adres e-mail</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="password" class="form-label">Hasło</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+  
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="remember">
+        <label class="form-check-label" for="remember">Zapamiętaj mnie</label>
+      </div>
+  
+      <button type="submit" class="btn btn-primary w-100">Zaloguj</button>
+    </form>
+  </div>
+{% endblock %}
