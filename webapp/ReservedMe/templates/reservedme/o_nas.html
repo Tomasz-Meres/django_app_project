@@ -6,16 +6,15 @@
     <meta charset="UTF-8">
         <!-- Link do niestandardowego pliku CSS -->
         <link rel="stylesheet" href="{% static 'reservedme/css/o_nas.css' %}">
-        <img src="{% static 'ReservedMe/img/logo.jpg' %}" alt="Logo">
     <title>O nas</title>
 </head>
 <body>
     <header>
-        <div class="logo"><img src="logo1.jpg" alt="Logo" width="100" height="70"></div>
+        <div class="logo"><img src="{% static 'ReservedMe/img/logo.png' %}" alt="Logo" height="70px" width="100px"></div>
         <nav>
             <a href="{% url 'kontakt' %}">Kontakt</a>
             <a href="{% url 'o_nas' %}">O nas</a>
-            <a href="{% url 'profil' %}">Zaloguj się</a>
+            <a href="{% url 'logowanie' %}">Zaloguj się</a>
         </nav>
     </header>
     <div class="tekst">
