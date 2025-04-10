@@ -1,27 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
+    
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Witaj Świecie</title>
-    <style>
-        /* Stylizowanie strony, aby tekst był wyśrodkowany */
-        body {
-            height: 100vh; /* Wysokość na 100% widoku */
-            margin: 0; /* Usunięcie marginesów */
-            display: flex; /* Użycie flexboxa */
-            justify-content: center; /* Wyśrodkowanie w poziomie */
-            align-items: center; /* Wyśrodkowanie w pionie */
-            font-family: Arial, sans-serif; /* Ustawienie czcionki */
-            background-color: red; /* Tło */
-        }
-        h1 {
-            font-size: 3em; /* Rozmiar czcionki */
-            color: #333; /* Kolor tekstu */
-        }
-    </style>
+        <!-- Link do niestandardowego pliku CSS -->
+        <link rel="stylesheet" href="{% static 'reservedme/css/o_nas.css' %}">
+    <title>O nas</title>
 </head>
 <body>
-    <h1>Witaj Świecie</h1>
+    <header>
+        <div class="logo"><img src="{% static 'ReservedMe/img/logo.png' %}" alt="Logo" height="70px" width="100px"></div>
+        <nav>
+            <a href="{% url 'kontakt' %}">Kontakt</a>
+            <a href="{% url 'o_nas' %}">O nas</a>
+            <a href="{% url 'logowanie' %}">Zaloguj się</a>
+        </nav>
+    </header>
+    <h1>Strona w trakcie budowy</h1>
+
 </body>
 </html>
