@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 # Rejestracja niestandardowego modelu użytkownika
 admin.site.register(CustomUser, UserAdmin)
 
-# Zarejestruj inne modele
+# Rejestracja innych modeli
 admin.site.register(Hotel)
 admin.site.register(Pokoj)
 admin.site.register(Rezerwacja)
