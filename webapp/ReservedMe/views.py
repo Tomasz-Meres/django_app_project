@@ -17,7 +17,7 @@ def base(request):
     context = {
         'user_name': user.__str__()
     }
-    return render(request, 'reservedme/base.html')
+    return render(request, 'reservedme/base.html', context)
 
 def logowanie(request):
     return render(request, 'reservedme/logowanie.html')
