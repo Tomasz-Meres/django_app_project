@@ -133,4 +133,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Customowy model użytkownika
 AUTH_USER_MODEL = 'ReservedMe.CustomUser' 
