@@ -1,61 +1,42 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pl">
+{% extends "reservedme/base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <!-- Link do niestandardowego pliku CSS -->
-    <link rel="stylesheet" href="{% static 'reservedme/css/o_nas.css' %}">
-    <title>O nas</title>
-</head>
+{% block title %}O nas{% endblock %}
 
-<body>
-    <header>
-        <div class="logo"><img src="{% static 'ReservedMe/img/logo.png' %}" alt="Logo" height="70px" width="100px">
-        </div>
-        <nav>
-            <a href="{% url 'kontakt' %}">Kontakt</a>
-            <a href="{% url 'o_nas' %}">O nas</a>
-            <a href="{% url 'logowanie' %}">Zaloguj się</a>
-        </nav>
-    </header>
-    <div class="tekst">
-        <h3>O nas – ReservMe</h3>
-        <p>ReservMe to nowoczesna platforma rezerwacyjna, która powstała z pasji do podróży oraz potrzeby uproszczenia
-            procesu znajdowania idealnego miejsca na nocleg.
-            Naszym celem jest stworzenie przestrzeni, w której planowanie podróży staje się szybkie, intuicyjne i
-            całkowicie bezstresowe – bez ukrytych kosztów, bez skomplikowanych
-            formularzy i bez niepotrzebnych pośredników.
-            Dopiero rozpoczynamy działalność, ale już teraz współpracujemy z rosnącą liczbą hoteli i pensjonatów, by
-            zaoferować naszym użytkownikom coraz szerszą bazę sprawdzonych
-            miejsc noclegowych – zarówno w dużych miastach, jak i w zacisznych zakątkach natury.
-            ReservMe jest dla każdego! Dla osób podróżujących prywatnie i służbowo, dla rodzin planujących wakacje, dla
-            par szukających romantycznego wypadu,
-            a także dla tych, którzy rezerwują na ostatnią chwilę. Dzięki naszej elastycznej ofercie i dynamicznie
-            rozwijającej się bazie hoteli,
-            każdy znajdzie coś dla siebie.</p>
+{% block content %}
+<div class="tekst">
+    <h3>O nas – ReservMe</h3>
+    <p>ReservMe to nowoczesna platforma rezerwacyjna, która powstała z pasji do podróży oraz potrzeby uproszczenia
+        procesu znajdowania idealnego miejsca na nocleg.
+        Naszym celem jest stworzenie przestrzeni, w której planowanie podróży staje się szybkie, intuicyjne i
+        całkowicie bezstresowe – bez ukrytych kosztów, bez skomplikowanych
+        formularzy i bez niepotrzebnych pośredników.
+        Dopiero rozpoczynamy działalność, ale już teraz współpracujemy z rosnącą liczbą hoteli i pensjonatów, by
+        zaoferować naszym użytkownikom coraz szerszą bazę sprawdzonych
+        miejsc noclegowych – zarówno w dużych miastach, jak i w zacisznych zakątkach natury.
+        ReservMe jest dla każdego! Dla osób podróżujących prywatnie i służbowo, dla rodzin planujących wakacje, dla
+        par szukających romantycznego wypadu,
+        a także dla tych, którzy rezerwują na ostatnią chwilę. Dzięki naszej elastycznej ofercie i dynamicznie
+        rozwijającej się bazie hoteli,
+        każdy znajdzie coś dla siebie.</p>
 
 
+    <h3> Dlaczego ReservMe?</h3>
+    <ul>
+        <li>Prostota – nasza platforma została zaprojektowana tak,aby każdy mógł z niej korzystać bez wysiłku –
+            niezależnie od wieku czy doświadczenia technicznego.
+            Wyszukujesz → wybierasz → rezerwujesz.</li>
+        <li>Przejrzystość – pokazujemy prawdziwe ceny i uczciwe opinie. U nas nie ma ukrytych opłat ani
+            marketingowych sztuczek.</li>
+        <li>Elastyczność – rezerwuj noclegi z dowolnego miejsca, o każdej porze – z poziomu komputera, tabletu czy
+            smartfona.</li>
+        <li>Bezpieczeństwo – dbamy o Twoje dane i zapewniamy bezpieczne formy płatności. Twoje zaufanie to nasz
+            priorytet.</li>
+    </ul>
+    <h3> Nasza wizja</h3>
+    <p>Chcemy stać się jedną z najbardziej zaufanych i przyjaznych użytkownikowi platform rezerwacyjnych w Europie –
+        a z czasem również na świecie. Budujemy społeczność podróżników,
+        którzy dzielą się opiniami, inspiracjami i pomagają sobie nawzajem odkrywać wyjątkowe miejsca.
+    </p>
 
-        <h3> Dlaczego ReservMe?</h3>
-        <ul>
-            <li>Prostota – nasza platforma została zaprojektowana tak,aby każdy mógł z niej korzystać bez wysiłku –
-                niezależnie od wieku czy doświadczenia technicznego.
-                Wyszukujesz → wybierasz → rezerwujesz.</li>
-            <li>Przejrzystość – pokazujemy prawdziwe ceny i uczciwe opinie. U nas nie ma ukrytych opłat ani
-                marketingowych sztuczek.</li>
-            <li>Elastyczność – rezerwuj noclegi z dowolnego miejsca, o każdej porze – z poziomu komputera, tabletu czy
-                smartfona.</li>
-            <li>Bezpieczeństwo – dbamy o Twoje dane i zapewniamy bezpieczne formy płatności. Twoje zaufanie to nasz
-                priorytet.</li>
-        </ul>
-        <h3> Nasza wizja</h3>
-        <p>Chcemy stać się jedną z najbardziej zaufanych i przyjaznych użytkownikowi platform rezerwacyjnych w Europie –
-            a z czasem również na świecie. Budujemy społeczność podróżników,
-            którzy dzielą się opiniami, inspiracjami i pomagają sobie nawzajem odkrywać wyjątkowe miejsca.
-        </p>
-
-    </div>
-</body>
-
-</html>
+</div>
+{% endblock %}

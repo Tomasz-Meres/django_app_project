@@ -13,11 +13,7 @@ def o_nas(request):
     return render(request, 'reservedme/o_nas.html')
 
 def base(request):
-    user = CustomUser.objects.get(id=request.user.id)
-    context = {
-        'user_name': user.__str__()
-    }
-    return render(request, 'reservedme/base.html', context)
+    return render(request, 'reservedme/base.html')
 
 def logowanie(request):
     return render(request, 'reservedme/logowanie.html')
