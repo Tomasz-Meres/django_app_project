@@ -1,13 +1,43 @@
-.bg-image-vertical {
-    position: relative;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: auto 100%;
+ /* .logowanie { 
+      
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      justify-content: center; 
+      align-items: center;     
+      
     }
-    
-    @media (min-width: 1025px) {
-    .h-custom-2 {
-    height: 100%;
-    }
-    }
+   */
+   body {
+    text-align: center;
+    font-size: xx-large;
+  }
+
+  button {
+
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 250px;
+
+  }
+
+  button:hover {
+    background-color: #45aF49;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input {
+    width: 20%;
+  }
