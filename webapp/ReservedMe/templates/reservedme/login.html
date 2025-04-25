@@ -18,12 +18,9 @@
             <label for="password">Hasło</label>
             <input type="password" id="password" name="password" required />
         </div>
+        <a href="{% url 'logowanie' %}">Nie pamiętasz hasła?</a>
         <div class="grupa-pola" style="text-align: center;">
-            <a href="{% url 'logowanie' %}">Nie pamiętasz hasła?</a>
-
             <button type="submit" class="przycisk-zatwierdzenia">Zaloguj się</button>
-
-
         </div>
     </form>
 </div>
@@ -45,6 +42,9 @@
         height: auto;
         font-family: Arial, sans-serif;
         margin-top: 5%;
+    }
+    .kontener a {
+        margin-top: 20px;
     }
 
     .formularz-rezerwacji {
