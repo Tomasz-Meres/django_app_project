@@ -1,7 +1,42 @@
 {% extends "reservedme/base.html" %}
 
-{% block title %}Logowanie{% endblock %}
+{% block title %}Formularz rezerwacji{% endblock %}
 
 {% block content %}
-<h1>tekst</h1>
+
+<form class="formularz-rezerwacji">
+    <h2>Rezerwacja</h2>
+
+    <div class="grupa-pola">
+        <label for="imie">Imię</label>
+        <input type="text" id="imie" name="imie" required>
+    </div>
+
+    <div class="grupa-pola">
+        <label for="nazwisko">Nazwisko</label>
+        <input type="text" id="nazwisko" name="nazwisko" required>
+    </div>
+
+    <div class="grupa-pola">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="grupa-pola">
+        <label for="haslo">Hasło</label>
+        <input type="password" id="haslo" name="haslo" required>
+    </div>
+
+    <div class="grupa-pola">
+        <label for="powtorzHaslo">Powtórz hasło</label>
+        <input type="password" id="powtorzHaslo" name="powtorzHaslo" required>
+    </div>
+
+    <div class="grupa-pola">
+        <label for="telefon">Telefon</label>
+        <input type="tel" id="telefon" name="telefon" pattern="[0-9]{9}" placeholder="123456789" required>
+    </div>
+
+    <button type="submit" class="przycisk-zatwierdzenia">Zarezerwuj</button>
+</form>
 {% endblock %}
