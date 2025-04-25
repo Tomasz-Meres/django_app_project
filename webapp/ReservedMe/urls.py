@@ -10,4 +10,5 @@ urlpatterns = [
     path('logowanie/', views.logowanie, name='logowanie'),  # Strona szablon
     path('rejestracja/', views.rejestracja, name='base'),  # Strona szablon
     path('rezerwacja/', views.rezerwacja, name='base'),  # Strona szablon
+    path('login/', views.login, name='base'),  # Strona szablon
 ]

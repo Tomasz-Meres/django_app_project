@@ -23,3 +23,6 @@ def rejestracja(request):
 
 def rezerwacja(request):
     return render(request, 'reservedme/rezerwacja.html')
+
+def login(request):
+    return render(request, 'reservedme/login.html')

@@ -1,0 +1,22 @@
+<div class="kontener">
+    <form class="formularz-rezerwacji" action="{% url 'profil' %}" method="get">
+      <h2>Logowanie</h2>
+  
+      <div class="grupa-pola">
+        <label for="username">Adres e-mail</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+  
+      <div class="grupa-pola">
+        <label for="password">Hasło</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+  
+      <button type="submit" class="przycisk-zatwierdzenia">Zaloguj się</button>
+  
+      <div class="grupa-pola" style="text-align: center;">
+        <a href="{% url 'logowanie' %}">Nie pamiętasz hasła?</a>
+      </div>
+    </form>
+  </div>
+  
