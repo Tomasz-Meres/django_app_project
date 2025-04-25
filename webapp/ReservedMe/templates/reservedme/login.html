@@ -7,25 +7,26 @@
 
 <div class="kontener">
     <form class="formularz-rezerwacji" action="{% url 'profil' %}" method="get">
-      <h2>Logowanie</h2>
-  
-      <div class="grupa-pola">
-        <label for="username">Adres e-mail</label>
-        <input type="text" id="username" name="username" required />
-      </div>
-  
-      <div class="grupa-pola">
-        <label for="password">Hasło</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-  
-      <button type="submit" class="przycisk-zatwierdzenia">Zaloguj się</button>
-  
-      <div class="grupa-pola" style="text-align: center;">
-        <a href="{% url 'logowanie' %}">Nie pamiętasz hasła?</a>
-      </div>
+        <h2>Logowanie</h2>
+
+        <div class="grupa-pola">
+            <label for="username">Adres e-mail</label>
+            <input type="text" id="username" name="username" required />
+        </div>
+
+        <div class="grupa-pola">
+            <label for="password">Hasło</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <div class="grupa-pola" style="text-align: center;">
+            <a href="{% url 'logowanie' %}">Nie pamiętasz hasła?</a>
+
+            <button type="submit" class="przycisk-zatwierdzenia">Zaloguj się</button>
+
+
+        </div>
     </form>
-  </div>
+</div>
 
 
 <style>
@@ -38,12 +39,12 @@
     }
 
     .kontener {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: auto;
-            font-family: Arial, sans-serif;
-            margin-top: 2%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        font-family: Arial, sans-serif;
+        margin-top: 5%;
     }
 
     .formularz-rezerwacji {
@@ -54,31 +55,31 @@
         width: 320px;
     }
 
-        .formularz-rezerwacji h2 {
-            color: #003580;
-            margin-bottom: 16px;
-            font-size: 22px;
-        }
+    .formularz-rezerwacji h2 {
+        color: #003580;
+        margin-bottom: 16px;
+        font-size: 22px;
+    }
 
     /* Grupa pola formularza */
     .grupa-pola {
         margin-bottom: 12px;
     }
 
-        .grupa-pola label {
-            display: block;
-            margin-bottom: 4px;
-            font-size: 14px;
-            color: #333;
-        }
+    .grupa-pola label {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+        color: #333;
+    }
 
-        .grupa-pola input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+    .grupa-pola input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
 
     /* Przycisk zatwierdzenia */
     .przycisk-zatwierdzenia {
@@ -93,9 +94,9 @@
         margin-top: 8px;
     }
 
-        .przycisk-zatwierdzenia:hover {
-            background-color: #002052;
-        }
+    .przycisk-zatwierdzenia:hover {
+        background-color: #002052;
+    }
 
     /* Responsywność */
     @media (max-width: 360px) {
