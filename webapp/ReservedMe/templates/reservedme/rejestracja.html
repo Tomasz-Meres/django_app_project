@@ -3,7 +3,7 @@
 {% block title %}Formularz rezerwacji{% endblock %}
 
 {% block content %}
-
+<div class="kontener">
 <form class="formularz-rezerwacji">
     <h2>Rezerwacja</h2>
 
@@ -39,4 +39,82 @@
 
     <button type="submit" class="przycisk-zatwierdzenia">Zarezerwuj</button>
 </form>
+</div>
+<style>
+    /* Kontener formularza */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .kontener {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            font-family: Arial, sans-serif;
+            margin-top: 2%;
+    }
+
+    .formularz-rezerwacji {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 320px;
+    }
+
+        .formularz-rezerwacji h2 {
+            color: #003580;
+            margin-bottom: 16px;
+            font-size: 22px;
+        }
+
+    /* Grupa pola formularza */
+    .grupa-pola {
+        margin-bottom: 12px;
+    }
+
+        .grupa-pola label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .grupa-pola input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+    /* Przycisk zatwierdzenia */
+    .przycisk-zatwierdzenia {
+        width: 100%;
+        padding: 10px;
+        background-color: #003580;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+
+        .przycisk-zatwierdzenia:hover {
+            background-color: #002052;
+        }
+
+    /* Responsywność */
+    @media (max-width: 360px) {
+        .formularz-rezerwacji {
+            width: 100%;
+            margin: 0 10px;
+        }
+    }
+</style>
 {% endblock %}
