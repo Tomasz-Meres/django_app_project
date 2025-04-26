@@ -1,43 +1,80 @@
- /* .logowanie { 
-      
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 300px;
-      justify-content: center; 
-      align-items: center;     
-      
-    }
-   */
-   body {
-    text-align: center;
-    font-size: xx-large;
+    /* Kontener formularza */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
   }
 
-  button {
-
-    padding: 10px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 250px;
-
+  .kontener {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      font-family: Arial, sans-serif;
+      margin-top: 5%;
+  }
+  
+  .kontener a {
+      font-size: 14px;
+      margin-bottom: 12px;
   }
 
-  button:hover {
-    background-color: #45aF49;
+  .formularz-rezerwacji {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 320px;
   }
 
-  label {
-    display: block;
-    margin-bottom: 5px;
+  .formularz-rezerwacji h2 {
+      color: #003580;
+      margin-bottom: 16px;
+      font-size: 22px;
   }
 
-  input {
-    width: 20%;
+  /* Grupa pola formularza */
+  .grupa-pola {
+      margin-bottom: 12px;
+  }
+
+  .grupa-pola label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #333;
+  }
+
+  .grupa-pola input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      font-size: 16px;
+  }
+
+  /* Przycisk zatwierdzenia */
+  .przycisk-zatwierdzenia {
+      width: 100%;
+      padding: 10px;
+      background-color: #003580;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 8px;
+  }
+
+  .przycisk-zatwierdzenia:hover {
+      background-color: #002052;
+  }
+
+  /* Responsywność */
+  @media (max-width: 360px) {
+      .formularz-rezerwacji {
+          width: 100%;
+          margin: 0 10px;
+      }
   }

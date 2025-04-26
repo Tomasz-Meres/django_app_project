@@ -1,26 +1,37 @@
 {% extends "reservedme/base.html" %}
-
+{% load static %}
+{% block styles %}<link rel="stylesheet" href="{% static 'reservedme/css/login_forms.css' %}">{% endblock %}
 {% block title %}Strona główna{% endblock %}
 
 {% block content %}
+<h2>Zarezerwuj swój pobyt</h2>
 <div class="kontener">
-<h1>Formularz</h1>
-<form action="#" method="post">
-    <label for="miasto">Miasto:</label><br>
-    <input type="text" id="miasto" name="miasto"><br><br>
+<form class="formularz-rezerwacji" method="post" action="#">
+    {% csrf_token %}
+    <h2>Rezerwacja</h2>
 
-    <label for="ilosc_osob">Ilość osób:</label><br>
-    <input type="number" id="ilosc_osob" name="ilosc_osob" min="1"><br><br>
+    <div class="grupa-pola">
+        <label for="miasto">Miasto</label>
+        <input type="text" id="miasto" name="miasto" required>
+    </div>
 
-    <label for="data_zameldowania">Data zameldowania:</label><br>
-    <input type="date" id="data_zameldowania" name="data_zameldowania"><br><br>
+    <div class="grupa-pola">
+        <label for="ilosc_osob">Ilość osób</label>
+        <input type="number" id="ilosc_osob" name="ilosc_osob" min="1" required>
+    </div>
 
-    <label for="data_wymeldowania">Data wymeldowania:</label><br>
-    <input type="date" id="data_wymeldowania" name="data_wymeldowania"><br><br>
+    <div class="grupa-pola">
+        <label for="data_zameldowania">Data zameldowania</label>
+        <input type="date" id="data_zameldowania" name="data_zameldowania" required>
+    </div>
 
+    <div class="grupa-pola">
+        <label for="data_wymeldowania">Data wymeldowania</label>
+        <input type="date" id="data_wymeldowania" name="data_wymeldowania" required>
+    </div>
 
-
-    <input type="submit" value="Zarejestruj">
+    <button type="submit" class="przycisk-zatwierdzenia">Zarezerwuj</button>
 </form>
+
 </div>
 {% endblock %}
