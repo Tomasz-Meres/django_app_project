@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages #to show message back for errors
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -32,12 +33,21 @@ def logout_user(request):
 
 
 def login_user(request):
-     if request.method == 'POST':
-          user = authenticate(username=request.POST['email'], password=request.POST['password'])
-          if user is not None:
-              login(request, user)
-              return redirect('home')
-          else:
-              messages.error(request, 'Invalid credentials')
-              return redirect('login_user')
-     return render(request, 'main/users/login.html')
+    if request.method == "POST":
+        email = request.POST['email']
+        password = request.POST['password']
+
+        # Próba zalogowania na podstawie emaila
+        user = CustomUser.objects.filter(email=email).first()
+        
+        if user is not None:
+            user = authenticate(request, username=user.username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')  # Zmien na odpowiednią stronę docelową
+            else:
+                messages.error(request, "Błędne hasło.")
+        else:
+            messages.error(request, "Użytkownik o podanym adresie e-mail nie istnieje.")
+        
+    return render(request, 'login.html')
