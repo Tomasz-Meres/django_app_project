@@ -55,6 +55,10 @@ def register(request):
         password = request.POST['password']
         nr_tel = request.POST['nr_tel']
 
+        if CustomUser.objects.filter(email=email).exists():
+            messages.error(request, "Użytkownik z tym adresem e-mail już istnieje.")
+            return redirect('rejestracja')
+        
         username = f"{fname} {lname[0]}"
         user = CustomUser.objects.create_user(
             username=username,  # username nie musi być unikalne
