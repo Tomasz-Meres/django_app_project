@@ -5,8 +5,6 @@
 {% block title %}Formularz logowania{% endblock %}
 
 {% block content %}
-
-
 <div class="kontener">
      
     <form class="formularz-rezerwacji" action="{% url 'login_user' %}" method="post">
@@ -19,7 +17,7 @@
 
         <div class="grupa-pola">
             <label for="password">Hasło</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="haslo" name="haslo" required />
         </div>
         <a href="{% url 'kontakt' %}">Nie pamiętasz hasła?</a>
         <div class="grupa-pola" style="text-align: center;">

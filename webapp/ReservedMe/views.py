@@ -34,7 +34,7 @@ def logout_user(request):
 def login_user(request):
     if request.method == "POST":
         email = request.POST['email']
-        password = request.POST['password']
+        password = request.POST['haslo']
 
         # Authenticate user using email (custom user model)
         user = authenticate(request, username=email, password=password)
