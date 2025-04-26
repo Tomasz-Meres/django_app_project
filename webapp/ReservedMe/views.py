@@ -17,16 +17,13 @@ def o_nas(request):
 def base(request):
     return render(request, 'reservedme/base.html')
 
-def logowanie(request):
-    return render(request, 'reservedme/logowanie.html')
-
 def rejestracja(request):
     return render(request, 'reservedme/rejestracja.html')
 
 def rezerwacja(request):
     return render(request, 'reservedme/rezerwacja.html')
 
-def login(request):
+def login_user(request):
     return render(request, 'reservedme/login.html')
 
 def logout_user(request):
