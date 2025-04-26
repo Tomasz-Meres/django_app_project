@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import CustomUser
+from django.contrib.auth import login, logout
 
 # Create your views here.
 def index(request):
@@ -26,3 +27,7 @@ def rezerwacja(request):
 
 def login(request):
     return render(request, 'reservedme/login.html')
+
+def logout_user(request):
+     logout(request)
+     return redirect('home')
