@@ -3,10 +3,26 @@
 {% block title %}Strona główna{% endblock %}
 
 {% block content %}
+<div class="kontener">
 <h1>Formularz</h1>
+<form action="#" method="post">
+    <label for="miasto">Miasto:</label><br>
+    <input type="text" id="miasto" name="miasto" required><br><br>
 
+    <label for="data_zameldowania">Data zameldowania:</label><br>
+    <input type="date" id="data_zameldowania" name="data_zameldowania" required><br><br>
 
+    <label for="data_wymeldowania">Data wymeldowania:</label><br>
+    <input type="date" id="data_wymeldowania" name="data_wymeldowania" required><br><br>
+
+    <label for="ilosc_osob">Ilość osób:</label><br>
+    <input type="number" id="ilosc_osob" name="ilosc_osob" min="1" required><br><br>
+
+    <input type="submit" value="Zarejestruj">
+</form>
+<br>
 {% if request.user.is_authenticated %}
 <h2>formularz</h2>
 {% endif %}
 {% endblock %}
+</div>
