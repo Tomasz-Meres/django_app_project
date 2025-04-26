@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-#from .models import CustomUser
+from .models import CustomUser
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages #to show message back for errors
 
@@ -31,7 +31,6 @@ def logout_user(request):
      logout(request)
      return redirect('home')
 
-
 def login_user(request):
     if request.method == "POST":
         email = request.POST['email']
@@ -47,3 +46,6 @@ def login_user(request):
             messages.error(request, "Błędne hasło lub e-mail.")
     
     return render(request, 'reservedme/login.html')
+
+def register(request):
+     return render(request, 'main/users/rejestracja.html')

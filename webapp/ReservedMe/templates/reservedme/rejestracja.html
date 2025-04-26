@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="kontener">
-<form class="formularz-rezerwacji">
+<form class="formularz-rezerwacji" method="post" action="{% url 'register_user' %}">
+    {% csrf_token %}
     <h2>Rejestracja</h2>
 
     <div class="grupa-pola">
