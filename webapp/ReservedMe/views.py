@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth import login, logout, authenticate
-from django.contrib import messages #to show message back for errors
+from django.contrib import messages 
 
 
 # Create your views here.
