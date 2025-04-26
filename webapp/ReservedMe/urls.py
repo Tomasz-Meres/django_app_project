@@ -8,8 +8,8 @@ urlpatterns = [
     path('base/', views.base, name='base'),  # Strona szablon
     path('profil/', views.base, name='profil'),  # Strona profilu
     path('logowanie/', views.logowanie, name='logowanie'),  # Strona szablon
-    path('rejestracja/', views.rejestracja, name='base'),  # Strona szablon
-    path('rezerwacja/', views.rezerwacja, name='base'),  # Strona szablon
+    path('rejestracja/', views.rejestracja, name='rejestracja'),  # Strona szablon
+    path('rezerwacja/', views.rezerwacja, name='rezerwacja'),  # Strona szablon
     path('login/', views.login, name='base'),  # Strona szablon
     path('logout/', views.logout_user, name='logout'),
 ]
