@@ -71,3 +71,6 @@ def register(request):
         login(request, user)
         return redirect('home')
     return render(request, 'main/users/rejestracja.html')
+
+def search(request):
+    return redirect('home')
