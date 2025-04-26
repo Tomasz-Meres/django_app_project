@@ -49,11 +49,11 @@ def login_user(request):
 
 def register(request):
     if request.method == 'POST':
-        fname = request.POST['first_name']
-        lname = request.POST['last_name']
+        fname = request.POST['imie']
+        lname = request.POST['nazwisko']
         email = request.POST['email']
-        password = request.POST['password']
-        nr_tel = request.POST['nr_tel']
+        password = request.POST['haslo']
+        nr_tel = request.POST['telefon']
 
         if CustomUser.objects.filter(email=email).exists():
             messages.error(request, "Użytkownik z tym adresem e-mail już istnieje.")
