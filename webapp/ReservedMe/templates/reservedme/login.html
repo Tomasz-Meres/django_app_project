@@ -6,12 +6,13 @@
 
 
 <div class="kontener">
-    <form class="formularz-rezerwacji" action="{% url 'index' %}" method="get">
+     
+    <form class="formularz-rezerwacji" action="{% url 'login_user' %}" method="post">
+        {% csrf_token %}
         <h2>Logowanie</h2>
-
         <div class="grupa-pola">
             <label for="username">Adres e-mail</label>
-            <input type="text" id="username" name="username" required />
+            <input type="text" id="email" name="email" required />
         </div>
 
         <div class="grupa-pola">
