@@ -9,6 +9,6 @@ urlpatterns = [
     path('profil/', views.base, name='profil'),  # Strona profilu
     path('rejestracja/', views.rejestracja, name='rejestracja'),  # Strona szablon
     path('rezerwacja/', views.rezerwacja, name='rezerwacja'),  # Strona szablon
-    path('login/', views.login_user, name='login'),  # Strona szablon
+    path('login/', views.login, name='login'),  # Strona szablon
      path('login_user/', views.login_user, name='login_user'),
 ]

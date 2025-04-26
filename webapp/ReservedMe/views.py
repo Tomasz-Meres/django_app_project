@@ -23,7 +23,7 @@ def rejestracja(request):
 def rezerwacja(request):
     return render(request, 'reservedme/rezerwacja.html')
 
-def login_user(request):
+def login(request):
     return render(request, 'reservedme/login.html')
 
 def logout_user(request):
@@ -32,13 +32,12 @@ def logout_user(request):
 
 
 def login_user(request):
-    email = request.POST['email']
-    password = request.POST['password']
-    
-    # Próba zalogowania użytkownika
-    user = authenticate(request, email=email, password=password)
-    if user is not None:
-        login(request, user)  # tutaj przekazujesz tylko request i user
-        return redirect('home')  # Zmienisz na odpowiednią stronę po zalogowaniu
-    else:
-        return render(request, 'login.html', {'error': 'Invalid credentials'})
+     if request.method == 'POST':
+          user = authenticate(username=request.POST['email'], password=request.POST['password'])
+          if user is not None:
+              login(request, user)
+              return redirect('home')
+          else:
+              messages.error(request, 'Invalid credentials')
+              return redirect('login_user')
+     return render(request, 'main/users/login.html')
