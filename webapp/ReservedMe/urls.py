@@ -10,5 +10,6 @@ urlpatterns = [
     path('rejestracja/', views.rejestracja, name='rejestracja'),  # Strona szablon
     path('rezerwacja/', views.rezerwacja, name='rezerwacja'),  # Strona szablon
     path('logowanie/', views.logowanie, name='logowanie'),  # Strona szablon
-     path('login_user/', views.login_user, name='login_user'),
+    path('login_user/', views.login_user, name='login_user'),
+    path('logout_user/', views.logout_user, name="logout_user"),
 ]

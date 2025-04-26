@@ -7,9 +7,6 @@
 
 
 {% if request.user.is_authenticated %}
-<a>{{request.user.first_name}}</a>
-<a href="{% url 'logout' %}">Wyloguj się</a>
-{% else %}
-<a href="{% url 'login' %}">Zaloguj się</a>
+<h2>formularz</h2>
 {% endif %}
 {% endblock %}

@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import CustomUser
+#from .models import CustomUser
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages #to show message back for errors
-from django.contrib.auth.models import User
+
 
 # Create your views here.
 def index(request):
@@ -29,7 +29,7 @@ def logowanie(request):
 
 def logout_user(request):
      logout(request)
-     return redirect('index')
+     return redirect('home')
 
 
 def login_user(request):
@@ -41,9 +41,8 @@ def login_user(request):
         user = authenticate(request, username=email, password=password)
 
         if user is not None:
-            # Log in the user if authenticated
             login(request, user)
-            return redirect('home')  # Zmien na odpowiednią stronę docelową
+            return redirect('home') 
         else:
             messages.error(request, "Błędne hasło lub e-mail.")
     
