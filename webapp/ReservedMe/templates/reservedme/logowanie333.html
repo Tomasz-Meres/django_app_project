@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'reservedme/css/o_nas.css' %}"> 
+  <title>Logowanie</title>
+  <header>
+    <div class="logo"><img src="{% static 'ReservedMe/img/logo.png' %}" alt="Logo" height="70px" width="100px">
+    </div>
+    <nav>
+        <a href="{% url 'kontakt' %}">Kontakt</a>
+        <a href="{% url 'o_nas' %}">O nas</a>
+        <a href="{% url 'profil' %}">Profil</a>
+    </nav>
+</header>
+<style>
+   /* .logowanie { 
+      
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      justify-content: center; 
+      align-items: center;     
+      
+    }
+   */
+  body{
+    text-align: center;
+    font-size:xx-large;
+  }
+
+  button
+  {
+    
+      padding: 10px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 250px;
+      
+  }
+  button:hover{
+    background-color: #45aF49;
+  }
+  label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: center;
+      font-size:xx-large;
+  }
+  input{
+    width: 20%;
+    height: 30px;
+    font-size: 16px;
+  }
+
+</style>
+
+
+</head>
+<body>
+  <div class="logowanie">
+    <h2>Logowanie</h2>
+    <form action="{% url 'profil' %}" method="get">
+      <div class="form-group">
+        <label for="username">Adres e-mail</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Hasło</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="submit">Zaloguj się</button>
+    </form>
+     <a href="{% url 'logowanie' %}">Nie pamiętasz hasła?</a>
+  </div>
+</div>
+</body>
+</html>
+
+

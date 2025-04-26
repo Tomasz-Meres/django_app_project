@@ -24,8 +24,8 @@ def rejestracja(request):
 def rezerwacja(request):
     return render(request, 'reservedme/rezerwacja.html')
 
-def login(request):
-    return render(request, 'reservedme/login.html')
+def logowanie(request):
+    return render(request, 'reservedme/logowanie.html')
 
 def logout_user(request):
      logout(request)
@@ -37,17 +37,14 @@ def login_user(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        # Próba zalogowania na podstawie emaila
-        user = CustomUser.objects.filter(email=email).first()
-        
+        # Authenticate user using email (custom user model)
+        user = authenticate(request, username=email, password=password)
+
         if user is not None:
-            user = authenticate(request, username=user.username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')  # Zmien na odpowiednią stronę docelową
-            else:
-                messages.error(request, "Błędne hasło.")
+            # Log in the user if authenticated
+            login(request, user)
+            return redirect('home')  # Zmien na odpowiednią stronę docelową
         else:
-            messages.error(request, "Użytkownik o podanym adresie e-mail nie istnieje.")
-        
-    return render(request, 'login.html')
+            messages.error(request, "Błędne hasło lub e-mail.")
+    
+    return render(request, 'reservedme/login.html')
