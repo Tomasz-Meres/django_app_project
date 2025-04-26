@@ -3,35 +3,97 @@
 {% block styles %}<link rel="stylesheet" href="{% static 'reservedme/css/index.css' %}">{% endblock %}
 {% block title %}Strona główna{% endblock %}
 
+
 {% block content %}
-<h2>Zarezerwuj swój pobyt</h2>
-<div class="kontener">
-<form class="formularz-rezerwacji" method="post" action="#">
-    {% csrf_token %}
-    <h2>Rezerwacja</h2>
-
-    <div class="grupa-pola">
-        <label for="miasto">Miasto</label>
-        <input type="text" id="miasto" name="miasto" required>
-    </div>
-
-    <div class="grupa-pola">
-        <label for="ilosc_osob">Ilość osób</label>
-        <input type="number" id="ilosc_osob" name="ilosc_osob" min="1" required>
-    </div>
-
-    <div class="grupa-pola">
-        <label for="data_zameldowania">Data zameldowania</label>
-        <input type="date" id="data_zameldowania" name="data_zameldowania" required>
-    </div>
-
-    <div class="grupa-pola">
-        <label for="data_wymeldowania">Data wymeldowania</label>
-        <input type="date" id="data_wymeldowania" name="data_wymeldowania" required>
-    </div>
-
-    <button type="submit" class="przycisk-zatwierdzenia">Zarezerwuj</button>
-</form>
-
+<div class="hotel-filter">
+    <h3>Wyszukaj idealny hotel</h3>
+    <form action="/search/" method="get">
+        <div class="form-group">
+            <label for="checkin">Zameldowanie</label>
+            <input type="date" id="checkin" name="checkin" required />
+        </div>
+        <div class="form-group">
+            <label for="checkout">Wymeldowanie</label>
+            <input type="date" id="checkout" name="checkout" required />
+        </div>
+        <div class="form-group">
+            <label for="city">Miasto</label>
+            <input type="text" id="city" name="city" placeholder="np. Kraków" required />
+        </div>
+        <div class="form-group">
+            <label for="guests">Liczba osób</label>
+            <select id="guests" name="guests" required>
+                <option value="" disabled selected>Wybierz</option>
+                <option value="1">1 osoba</option>
+                <option value="2">2 osoby</option>
+                <option value="3">3 osoby</option>
+                <option value="4">4 osoby</option>
+                <option value="5">5 osób</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rooms">Liczba pokoi</label>
+            <select id="rooms" name="rooms" required>
+                <option value="" disabled selected>Wybierz</option>
+                <option value="1">1 pokój</option>
+                <option value="2">2 pokoje</option>
+                <option value="3">3 pokoje</option>
+                <option value="4">4 pokoje</option>
+            </select>
+        </div>
+        <button type="submit">Szukaj hoteli</button>
+    </form>
 </div>
+
+<style>
+    .hotel-filter {
+        text-align: center;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 50%;
+        margin: 20px auto;
+    }
+
+    .hotel-filter h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 1.2em;
+        color: #333;
+    }
+
+    input, select {
+        width: 60%;
+        height: 35px;
+        font-size: 1em;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 60%;
+    }
+
+    button:hover {
+        background-color: #45aF49;
+    }
+</style>
 {% endblock %}
