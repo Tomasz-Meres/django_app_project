@@ -1,37 +1,3 @@
-{% extends "reservedme/base.html" %}
-
-{% block styles %}
-<link rel="stylesheet" href="{% static 'reservedme/css/login_forms.css' %}">
-{% endblock %}
-
-{% block title %}Formularz logowania{% endblock %}
-
-{% block content %}
-
-
-<div class="kontener">
-     
-    <form class="formularz-rezerwacji" action="{% url 'login_user' %}" method="post">
-        {% csrf_token %}
-        <h2>Logowanie</h2>
-        <div class="grupa-pola">
-            <label for="email">Adres e-mail</label>
-            <input type="email" id="email" name="email" required />
-        </div>
-
-        <div class="grupa-pola">
-            <label for="password">Hasło</label>
-            <input type="password" id="password" name="password" required />
-        </div>
-        <a href="{% url 'kontakt' %}">Nie pamiętasz hasła?</a>
-        <div class="grupa-pola" style="text-align: center;">
-            <button type="submit" class="przycisk-zatwierdzenia">Zaloguj się</button>
-        </div>
-    </form>
-</div>
-
-
-<style>
     /* Kontener formularza */
     * {
         box-sizing: border-box;
@@ -112,5 +78,3 @@
             margin: 0 10px;
         }
     }
-</style>
-{% endblock %}

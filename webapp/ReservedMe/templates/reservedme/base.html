@@ -4,8 +4,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Link do niestandardowego pliku CSS -->
+    <!-- Link do ogólnego stylu CSS -->
     <link rel="stylesheet" href="{% static 'reservedme/css/o_nas.css' %}">
+    {% block styles %}
+    <!-- Możliwość dodania dodatkowych styli CSS -->
+    {% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 
