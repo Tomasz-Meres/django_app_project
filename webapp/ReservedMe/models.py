@@ -8,9 +8,11 @@ from django.conf import settings
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     nr_tel = models.CharField(max_length=20)
-
+    username = models.CharField(max_length=150, blank=True)
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username','first_name', 'last_name']
+    
     
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

@@ -48,4 +48,22 @@ def login_user(request):
     return render(request, 'reservedme/login.html')
 
 def register(request):
-     return render(request, 'main/users/rejestracja.html')
+    if request.method == 'POST':
+        fname = request.POST['first_name']
+        lname = request.POST['last_name']
+        email = request.POST['email']
+        password = request.POST['password']
+        nr_tel = request.POST['nr_tel']
+
+        username = f"{fname} {lname[0]}"
+        user = CustomUser.objects.create_user(
+            username=username,  # username nie musi być unikalne
+            email=email, 
+            password=password,
+            first_name=fname,
+            last_name=lname,
+            nr_tel=nr_tel
+            )
+        login(request, user)
+        return redirect('home')
+    return render(request, 'main/users/rejestracja.html')
