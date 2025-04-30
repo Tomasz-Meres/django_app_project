@@ -41,7 +41,7 @@ class Pokoj(models.Model):
         related_name="pokoje"
     )
     ilu_osobowy = models.IntegerField()
-    liczba_pokoi = models.IntegerField(default=1)
+    liczba_pokoi = models.IntegerField()
     numer_pokoju = models.IntegerField()
     cena_za_noc = models.DecimalField(max_digits=10, decimal_places=2)
 
