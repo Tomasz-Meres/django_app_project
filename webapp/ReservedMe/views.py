@@ -181,3 +181,9 @@ def add_hotel(request):
 def hotel_list(request):
     hotele = Hotel.objects.filter(uzytkownik=request.user)
     return render(request, 'reservedme/hotel_list.html', {'hotele': hotele})
+
+
+# wyswietlanie Wszystkich hoteli
+def all_hotel_list(request):
+    hotele = Hotel.objects.all()
+    return render(request, 'reservedme/index.html', {'hotele': hotele})

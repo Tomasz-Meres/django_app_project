@@ -51,8 +51,24 @@
         <button type="submit">Szukaj hoteli</button>
     </form>
 </div>
-
-
+<!--
+<div class="">
+    {% for h in hotele %}
+        <div style="border: 1px solid black; width: 400px; margin: 10px; height: auto;">
+            <h2>{{ h.nazwa }}</h2>
+            <p>Miasto: {{ h.miasto }}</p>
+            <p>Ulica: {{ h.ulica }}</p>
+            <p>Kraj: {{ h.kraj }}</p>
+            <p>Opis: {{ h.opis }}</p>
+            <p>Telefon: {{ h.telefon }}</p>
+            <p>Email: {{ h.email }}</p>
+        </div>
+    {% empty %}
+        <p>Brak hoteli do wyświetlenia.</p>
+        <p><a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a></p>
+    {% endfor %}
+</div>
+-->
 <style>
     .hotel-filter {
         text-align: center;
