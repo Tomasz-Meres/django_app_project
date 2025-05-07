@@ -5,8 +5,22 @@
 {% block content %}
 
 
-<!-- Treść strony będzie tu wstawiana -->
-<h1>witamy</h1>
-<p>awdawda</p>
+<div class="profile_test">
+    <ul>
+    <li><a href="{% url 'profile' %}">Moje dane</a></li>
+    <li><a href="{% url 'add_hotel' %}">Dodaj hotel</a></li>
+    <li><a href="{% url 'add_room' %}">Dodaj pokoje</a></li>
+    <li><a href="{% url 'my_reservations' %}">Moje rezerwacje</a></li>
+    <li><a href="{% url 'favourite_hotels' %}">Ulubione hotele</a></li>
+    </ul>
+</div>>
 
+<style>
+.profile_test{
+    background-color: aqua;
+    height: 500px;
+    width: auto;
+    font-size: 16px;
+}
+</style>
 {% endblock %}
