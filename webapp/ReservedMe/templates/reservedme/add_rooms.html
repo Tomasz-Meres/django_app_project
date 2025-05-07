@@ -3,59 +3,63 @@
 {% block title %}Twoje Konto{% endblock %}
 
 {% block content %}
-
-
-
 <div>
-    <h2>Wybierz hotel do edytowania</h2>
-    <div>
-        <table>
-            <tr>
-                <th>Nazwa</th>
-                <th>Miasto</th>
-                <th>Ulica</th>
-                <th></th>
-            </tr>
-            {% for h in hotele %}
 
-            <tr>
-                <td>{{ h.nazwa }}</td>
-                <td>{{ h.miasto }}</td>
-                <td>{{ h.ulica }}</td>
-                <td><input type="button" value="wybierz"></td>
-            </tr>
-            {% empty %}
-            <tr><td colspan="4">Brak hoteli do wyświetlenia.</td></tr>
-            <tr><td colspan="4"><a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a></td></tr>
-            
-            {% endfor %}
-
-        </table>
-    </div>
-
-    <form>
-        <select id="guests" name="guests">
+    <form class="test_rooms" method="post" action="{% url 'create_room' %}">
+        {% csrf_token %}
+        <label for="hotel">Wybierz hotel do którego chcesz dodać pokój</label>
+        <select id="hotel" name="hotel" required>
             <option value="" disabled selected>Wybierz</option>
             {% for h in hotele %}
                 <option value="{{ h.id }}">
                 {{ h.nazwa }} {{ h.miasto }} {{ h.ulica }} 
                 </option>
-            
-                
-                
-                
-                <td><input type="button" value="wybierz"></td>
-            
             {% empty %}
             Brak hoteli do wybrania.
             <a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a>
             
             {% endfor %}
         </select>
+
+        <br>
+       <label for="ile_osob">Ilu osobowy:</label>
+        <select id="ile_osob" name="ile_osob" required>
+            <option value="" disabled selected>Wybierz</option>
+            <option value="1">1 osoba</option>
+            <option value="2">2 osoby</option>
+            <option value="3">3 osoby</option>
+            <option value="4">4 osoby</option>
+            <option value="5">5 osób</option>
+        </select>
+        <br>
+
+        <label for="pokoje">Ilu pokojowy:</label>
+        <select id="pokoje" name="pokoje" required>
+            <option value="" disabled selected>Wybierz</option>
+            <option value="1">1 pokój</option>
+            <option value="2">2 pokoje</option>
+            <option value="3">3 pokoje</option>
+            <option value="4">4 pokoje</option>
+        </select>
+        <br>
+
+        <label for="nr_pok">Nr. pokoju:</label>
+        <input type="int" id="nr_pok" name="nr_pok">
+        <br>
+        <label for="cena_za_noc">Cena za noc:</label>
+        <input type="number" id="cena" name="cena" required step="0.01" min="0">
+        <br>
+        <input type="submit" value="Dodaj pokój">
     </form>
-
-
 </div>
 
-
+<style>
+.test_rooms{
+    background-color: white;
+    padding: 10px;
+    height: auto;
+    width: 500px;
+    font-size: 14px;
+}
+</style>
 {% endblock %}

@@ -35,5 +35,7 @@ urlpatterns = [
     
     # Zarządzanie hotelami i rezerwacjami
     path('create_hotel', views.add_hotel, name='create_hotel'), # dodanie nowego hotelu
-
+    path('create_room', views.add_room, name='create_room'), # dodanie nowego hotelu
+    path('remove_hotel', views.remove_hotel, name='remove_hotel'), # dodanie nowego hotelu
+    
 ]

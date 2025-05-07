@@ -4,7 +4,9 @@ from .models import CustomUser, Hotel, Pokoj, Rezerwacja
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 import re
+
 
 
 # Create your views here.
@@ -62,7 +64,7 @@ def profile_view(request):
 @login_required
 def add_rooms(request):
     hotele = Hotel.objects.filter(uzytkownik=request.user)
-    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele})
+    return render(request, 'reservedme/add_rooms.html', {'hotele': hotele})
 
 
 # Logowanie, wylogowanie oraz rejestracja użytkownikiów
@@ -76,7 +78,7 @@ def login_user(request):
         email = request.POST['email']
         password = request.POST['haslo']
 
-        # Authenticate user using email (custom user model)
+        # Autentykacja przy użyciu CustomUser model
         user = authenticate(request, username=email, password=password)
 
         if user is not None:
@@ -160,7 +162,7 @@ def add_hotel(request):
        # zdjecie = request.POST['zdjecie']
         
         if not kraj:
-            kraj = 'Polska'  # lub inna wartość domyślna
+            kraj = 'Polska' 
 
         if not opis:
             opis = 'Brak opisu'
@@ -181,6 +183,30 @@ def add_hotel(request):
         return redirect('add_hotel')
     return render(request, 'reservedme/profil.html')
 
+def add_room(request):
+    if request.method == 'POST':
+        hotel_id = request.POST['hotel']
+        ile_osob = request.POST['ile_osob']
+        ile_pokoi = request.POST['pokoje']
+        nr_pok = request.POST['nr_pok']
+        cena = request.POST['cena']
+    
+        hotel_obj = Hotel.objects.get(id=hotel_id)
+
+        if not nr_pok:
+            nr_pok = 0
+
+    
+        Pokoj.objects.create(
+            hotel=hotel_obj,
+            ilu_osobowy = ile_osob,
+            liczba_pokoi = ile_pokoi,
+            numer_pokoju = nr_pok,
+            cena_za_noc = cena
+        )
+        
+        return redirect('add_rooms')
+    return render(request, 'reservedme/profil.html')
 
 # wyswietlanie listy hoteli danego użytkownika
 def hotel_list(request):
@@ -199,3 +225,11 @@ def hotel_management(request):
     return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele})
 
 
+# Usuwanie hotelu
+def remove_hotel(request):
+    if request.method == 'POST':
+        id = request.POST['hotel_id']
+        hotel = get_object_or_404(Hotel, pk=id)
+        hotel.delete()
+
+    return redirect('hotel_list')
