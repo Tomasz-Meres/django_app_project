@@ -59,6 +59,9 @@ def my_reservations_view(request):
 def profile_view(request):
     return render(request, 'reservedme/profile.html')
 
+@login_required
+def add_rooms(request):
+    return render(request, 'reservedme/add_rooms.html')
 
 # Logowanie, wylogowanie oraz rejestracja użytkownikiów
 
@@ -187,3 +190,10 @@ def hotel_list(request):
 def all_hotel_list(request):
     hotele = Hotel.objects.all()
     return render(request, 'reservedme/index.html', {'hotele': hotele})
+
+
+def hotel_management(request):
+    hotele = Hotel.objects.filter(uzytkownik=request.user)
+    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele})
+
+
