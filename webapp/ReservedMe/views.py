@@ -115,8 +115,8 @@ def add_hotel(request):
 
         if not kraj:
             kraj = 'Polska'  # wartość domyślna
-            
-        hotel = Hotel.objects.create(
+
+        Hotel.objects.create(
             uzytkownik= user_id,
             nazwa=nazwa,
             miasto=miasto,
@@ -129,5 +129,5 @@ def add_hotel(request):
             
         )
         
-        return redirect('home')
-    return render(request, 'main/users/rejestracja.html')
+        return redirect('add_hotel')
+    return render(request, 'reservedme/profil.html')

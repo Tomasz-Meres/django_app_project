@@ -11,7 +11,7 @@
 <h1>Dodawanie hotelu:</h1>
 
 <div class="new-hotel-test" style="background-color: white;">
-    <form action="#" method="post">
+    <form action="{% url 'create_hotel' %}" method="post">
         {% csrf_token %}
         <label for="nazwa">Nazwa hotelu:</label>
         <input type="text" id="nazwa" name="nazwa" required>

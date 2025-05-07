@@ -28,5 +28,6 @@ urlpatterns = [
     path('base-account', views.base_account, name='base-account'),
 
     # Zarządzanie hotelami i rezerwacjami
-    
+    path('create_hotel', views.add_hotel, name='create_hotel'), # dodanie nowego hotelu
+
 ]
