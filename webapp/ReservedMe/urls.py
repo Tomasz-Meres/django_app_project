@@ -24,4 +24,6 @@ urlpatterns = [
     path('logout_user/', views.logout_user, name="logout_user"),  # Wylogowanie używkownika
     path('register', views.register, name='register_user'), # Dodanie nowego użytkownika
     path('search', views.search, name='search'), # Szukanie hoteli w bazie danych
+
+    path('base-account', views.base_account, name='base-account'),
 ]

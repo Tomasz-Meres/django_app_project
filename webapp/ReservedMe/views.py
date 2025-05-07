@@ -45,6 +45,9 @@ def my_reservations_view(request):
 def profile_view(request):
     return render(request, 'reservedme/profile.html')
 
+def base_account(request):
+    return render(request, 'reservedme/base-account.html')
+
 
 def logout_user(request):
      logout(request)
