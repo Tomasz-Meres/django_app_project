@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import CustomUser
+from .models import CustomUser, Hotel, Pokoj, Rezerwacja
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
 
@@ -97,5 +97,37 @@ def register(request):
 def search(request):
     return redirect('home')
 
-
 # dodanie nowego hotelu
+def add_hotel(request):
+    if request.method == 'POST':
+        nazwa = request.POST['nazwa']
+        miasto = request.POST['miasto']
+        ulica = request.POST['ulica']
+        opis = request.POST['opis']
+        kraj = request.POST['kraj']
+        email = request.POST['email']
+        nr_tel = request.POST['telefon']
+       # zdjecie = request.POST['zdjecie']
+        user_id = request.user.id # pobranie id aktualnie zalogowanego użytkownika
+        
+        if not opis:
+            opis = 'Brak opisu'  # wartość domyślna jeśli użytkownik nic nie wpisał
+
+        if not kraj:
+            kraj = 'Polska'  # wartość domyślna
+            
+        hotel = Hotel.objects.create(
+            uzytkownik= user_id,
+            nazwa=nazwa,
+            miasto=miasto,
+            ulica=ulica,
+            kraj=kraj,
+            opis=opis,
+            telefon=nr_tel,
+            email=email, 
+            # zdjecie=zdjecie
+            
+        )
+        
+        return redirect('home')
+    return render(request, 'main/users/rejestracja.html')
