@@ -4,6 +4,7 @@ from .models import CustomUser, Hotel, Pokoj, Rezerwacja
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
+import re
 
 
 # Create your views here.
@@ -81,18 +82,46 @@ def login_user(request):
     
     return render(request, 'reservedme/login.html')
 
+def validate_password(password):
+    if len(password) < 8:
+        return False, 'Hasło musi mieć conajmniej 8 znaków'
+
+    if not re.search(r'[a-z]', password):
+        return False, 'Hasło musi zawierać min. 1 małą literę'
+
+    if not re.search(r'[A-Z]', password):
+        return False, 'Hasło musi zawierać min. 1 dużą literę'
+    
+    if not re.search(r'[0-9]', password):
+        return False, 'Hasło musi zawierać min. 1 cyfrę'    
+    
+    if not re.search(r'[!@#$]', password):
+        return False, 'Hasło musi zawierać min. 1 znak specjalny'
+    return True, ''
+
 def register(request):
     if request.method == 'POST':
         fname = request.POST['imie']
         lname = request.POST['nazwisko']
         email = request.POST['email']
         password = request.POST['haslo']
+        password2 = request.POST['powtorzHaslo']
         nr_tel = request.POST['telefon']
 
         if CustomUser.objects.filter(email=email).exists():
             messages.error(request, "Użytkownik z tym adresem e-mail już istnieje.")
             return redirect('rejestracja')
         
+        if password != password2:
+            messages.error(request, "Hasła nie są identyczne")
+            return redirect('rejestracja')
+        
+        is_valid, message = validate_password(password)
+        if not is_valid:
+            messages.error(request, message)
+            return redirect('rejestracja',) 
+
+
         username = f"{fname} {lname[0]}"
         user = CustomUser.objects.create_user(
             username=username,  # username nie musi być unikalne
@@ -104,7 +133,7 @@ def register(request):
             )
         login(request, user)
         return redirect('home')
-    return render(request, 'main/users/rejestracja.html')
+    return render(request, 'reservedme/rejestracja.html')
 
 
 
@@ -119,14 +148,17 @@ def add_hotel(request):
         nazwa = request.POST['nazwa']
         miasto = request.POST['miasto']
         ulica = request.POST['ulica']
-        opis = request.POST.get('opis', '')  # jeśli pole będzie puste model 
-        kraj = request.POST.get('kraj', '')  # przypisze domyślne wartości
+        opis = request.POST.get('opis') 
+        kraj = request.POST.get('kraj') 
         email = request.POST['email']
         nr_tel = request.POST['telefon']
        # zdjecie = request.POST['zdjecie']
-        # user_id = request.user # pobranie id aktualnie zalogowanego użytkownika
         
+        if not kraj:
+            kraj = 'Polska'  # lub inna wartość domyślna
 
+        if not opis:
+            opis = 'Brak opisu'
 
         Hotel.objects.create(
             uzytkownik= request.user,
