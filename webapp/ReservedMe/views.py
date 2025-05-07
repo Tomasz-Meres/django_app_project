@@ -18,6 +18,9 @@ def o_nas(request):
 def base(request):
     return render(request, 'reservedme/base.html')
 
+def profil(request):
+    return render(request, 'reservedme/profil.html')
+
 def rejestracja(request):
     return render(request, 'reservedme/rejestracja.html')
 
