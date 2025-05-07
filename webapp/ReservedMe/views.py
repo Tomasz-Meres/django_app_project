@@ -103,21 +103,17 @@ def add_hotel(request):
         nazwa = request.POST['nazwa']
         miasto = request.POST['miasto']
         ulica = request.POST['ulica']
-        opis = request.POST['opis']
-        kraj = request.POST['kraj']
+        opis = request.POST.get('opis', '')  # jeśli pole będzie puste model 
+        kraj = request.POST.get('kraj', '')  # przypisze domyślne wartości
         email = request.POST['email']
         nr_tel = request.POST['telefon']
        # zdjecie = request.POST['zdjecie']
-        user_id = request.user.id # pobranie id aktualnie zalogowanego użytkownika
+        # user_id = request.user # pobranie id aktualnie zalogowanego użytkownika
         
-        if not opis:
-            opis = 'Brak opisu'  # wartość domyślna jeśli użytkownik nic nie wpisał
 
-        if not kraj:
-            kraj = 'Polska'  # wartość domyślna
 
         Hotel.objects.create(
-            uzytkownik= user_id,
+            uzytkownik= request.user,
             nazwa=nazwa,
             miasto=miasto,
             ulica=ulica,
@@ -126,7 +122,7 @@ def add_hotel(request):
             telefon=nr_tel,
             email=email, 
             # zdjecie=zdjecie
-            
+             
         )
         
         return redirect('add_hotel')
