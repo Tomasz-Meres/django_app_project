@@ -30,6 +30,22 @@ def rezerwacja(request):
 def logowanie(request):
     return render(request, 'reservedme/logowanie.html')
 
+def add_hotel_view(request):
+    return render(request, 'reservedme/add_hotel.html')
+
+def add_room_view(request):
+    return render(request, 'reservedme/add_room.html')
+
+def favourite_hotels_view(request):
+    return render(request, 'reservedme/favourite_hotels.html')
+
+def my_reservations_view(request):
+    return render(request, 'reservedme/my_reservations.html')
+
+def profile_view(request):
+    return render(request, 'reservedme/profile.html')
+
+
 def logout_user(request):
      logout(request)
      return redirect('home')
