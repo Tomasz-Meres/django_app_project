@@ -13,7 +13,7 @@ urlpatterns = [
 
     # Strony widoczne po zalogowaniu
     path('dodaj-hotel/', views.add_hotel_view, name='add_hotel'),  # Strona 
-    path('dodaj-pokoje/', views.add_room_view, name='add_room'),  # Strona 
+    path('zarządzaj-hotelami/', views.manage_rooms, name='manage_rooms'),  # Strona 
     path('ulubione-hotele/', views.favourite_hotels_view, name='favourite_hotels'),  # Strona 
     path('moje-rezerwacje/', views.my_reservations_view, name='my_reservations'),  # Strona 
     path('moje-dane/', views.profile_view, name='profile'),  # Strona 

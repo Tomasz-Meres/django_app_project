@@ -11,7 +11,7 @@
     
     <div>
         {% for h in hotele %}
-            <div style="border: 1px solid black; width: auto; height: auto;">
+            <div style="border: 1px solid black; width: 400px; margin: 10px; height: auto;">
                 <h2>{{ h.nazwa }}</h2>
                 <p>Miasto: {{ h.miasto }}</p>
                 <p>Ulica: {{ h.ulica }}</p>
@@ -22,7 +22,7 @@
             </div>
         {% empty %}
             <p>Brak hoteli do wyświetlenia.</p>
-            <p><a href="{% url 'add_hotel'%}">Dodaj swój hotel</a></p>
+            <p><a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a></p>
         {% endfor %}
     </div>
 </div>

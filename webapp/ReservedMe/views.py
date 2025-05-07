@@ -33,8 +33,8 @@ def logowanie(request):
 def add_hotel_view(request):
     return render(request, 'reservedme/add_hotel.html')
 
-def add_room_view(request):
-    return render(request, 'reservedme/add_room.html')
+def manage_rooms(request):
+    return render(request, 'reservedme/manage_rooms.html')
 
 def favourite_hotels_view(request):
     return render(request, 'reservedme/favourite_hotels.html')
@@ -130,5 +130,5 @@ def add_hotel(request):
 
 
 def hotel_list(request):
-    hotele = Hotel.objects.all()
+    hotele = Hotel.objects.filter(uzytkownik=request.user)
     return render(request, 'reservedme/hotel_list.html', {'hotele': hotele})
