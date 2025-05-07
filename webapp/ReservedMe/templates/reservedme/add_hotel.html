@@ -4,12 +4,44 @@
 
 {% block content %}
 
-
-
 <div style="background-color: aquamarine;">
     <p>dodaj hoetl</p>
 </div>
-<form>
-    
-</form>
+
+<h1>Dodawanie hotelu:</h1>
+
+<div class="new-hotel-test" style="background-color: white;">
+    <form action="#" method="post">
+        {% csrf_token %}
+        <label for="nazwa">Nazwa hotelu:</label>
+        <input type="text" id="nazwa" name="nazwa" required>
+
+        <label for="miasto">Miasto:</label>
+        <input type="text" id="miasto" name="miasto" required>
+
+        <label for="ulica">Ulica:</label>
+        <input type="text" id="ulica" name="ulica" required>
+
+        <label for="kraj">Kraj:</label>
+        <input type="text" id="kraj" name="kraj">
+
+        <label for="opis">Opis:</label>
+        <input type="text" id="opis" name="opis">
+
+        <label for="telefon">Telefon:</label>
+        <input type="tel" id="telefon" name="telefon" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="zdjecie">Zdjęcie:</label>
+        <input type="text" id="zdjecie" name="zdjecie">
+
+        <input type="submit" value="Dodaj">
+    </form>
+</div>
+
+<style>
+
+</style>
 {% endblock %}

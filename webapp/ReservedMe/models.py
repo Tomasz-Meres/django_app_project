@@ -27,11 +27,11 @@ class Hotel(models.Model):
     nazwa = models.CharField(max_length=255)
     miasto = models.CharField(max_length=100)
     ulica = models.CharField(max_length=255)
-    kraj = models.CharField(max_length=100)
-    opis = models.TextField()
+    kraj = models.CharField(max_length=100, default="Polska")
+    opis = models.TextField(default="")
     telefon = models.CharField(max_length=20)
     email = models.EmailField(max_length=255)
-    zdjecie = models.CharField(max_length=255)
+    zdjecie = models.CharField(max_length=255, default="")
 
 #  Model dla pokoju
 class Pokoj(models.Model):

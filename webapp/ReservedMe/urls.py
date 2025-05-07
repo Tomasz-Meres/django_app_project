@@ -26,4 +26,7 @@ urlpatterns = [
     path('search', views.search, name='search'), # Szukanie hoteli w bazie danych
 
     path('base-account', views.base_account, name='base-account'),
+
+    # Zarządzanie hotelami i rezerwacjami
+    
 ]

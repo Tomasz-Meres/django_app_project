@@ -96,3 +96,6 @@ def register(request):
 
 def search(request):
     return redirect('home')
+
+
+# dodanie nowego hotelu
