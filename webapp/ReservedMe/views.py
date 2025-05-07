@@ -127,3 +127,8 @@ def add_hotel(request):
         
         return redirect('add_hotel')
     return render(request, 'reservedme/profil.html')
+
+
+def hotel_list(request):
+    hotele = Hotel.objects.all()
+    return render(request, 'reservedme/hotel_list.html', {'hotele': hotele})

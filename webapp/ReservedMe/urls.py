@@ -17,6 +17,7 @@ urlpatterns = [
     path('ulubione-hotele/', views.favourite_hotels_view, name='favourite_hotels'),  # Strona 
     path('moje-rezerwacje/', views.my_reservations_view, name='my_reservations'),  # Strona 
     path('moje-dane/', views.profile_view, name='profile'),  # Strona 
+    path('moje-hotele/', views.hotel_list, name='hotel_list'),
 
 
     # Rejestracja oraz logowanie użytkonika
