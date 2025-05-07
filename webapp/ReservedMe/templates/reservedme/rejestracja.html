@@ -41,12 +41,14 @@
     </div>
 
     <button type="submit" class="przycisk-zatwierdzenia">Stwórz konto</button>
-</form>
+
 {% if messages %}
     {% for message in messages %}
-        <p>{{ message }}</p>
+        <p style="color: red; font-size: 14px;">{{ message }}</p>
     {% endfor %}
 {% endif %}
+</form>
+
 </div>
 
 {% endblock %}
