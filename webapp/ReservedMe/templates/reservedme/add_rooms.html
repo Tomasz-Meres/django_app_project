@@ -33,6 +33,26 @@
         </table>
     </div>
 
+    <form>
+        <select id="guests" name="guests">
+            <option value="" disabled selected>Wybierz</option>
+            {% for h in hotele %}
+                <option value="{{ h.id }}">
+                {{ h.nazwa }} {{ h.miasto }} {{ h.ulica }} 
+                </option>
+            
+                
+                
+                
+                <td><input type="button" value="wybierz"></td>
+            
+            {% empty %}
+            Brak hoteli do wybrania.
+            <a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a>
+            
+            {% endfor %}
+        </select>
+    </form>
 
 
 </div>

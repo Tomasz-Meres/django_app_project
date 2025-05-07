@@ -61,7 +61,9 @@ def profile_view(request):
 
 @login_required
 def add_rooms(request):
-    return render(request, 'reservedme/add_rooms.html')
+    hotele = Hotel.objects.filter(uzytkownik=request.user)
+    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele})
+
 
 # Logowanie, wylogowanie oraz rejestracja użytkownikiów
 
