@@ -135,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Customowy model użytkownika
 AUTH_USER_MODEL = 'ReservedMe.CustomUser' 
+
+LOGIN_URL = '/logowanie'

@@ -3,9 +3,20 @@ from django.http import HttpResponse
 from .models import CustomUser, Hotel, Pokoj, Rezerwacja
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+
+# Szablony stron
+def base(request):
+    return render(request, 'reservedme/base.html')
+
+def base_account(request):
+    return render(request, 'reservedme/base-account.html')
+
+
+# Strony widoczne bez zalogowania
 def index(request):
     return render(request, 'reservedme/index.html')
 
@@ -15,39 +26,40 @@ def kontakt(request):
 def o_nas(request):
     return render(request, 'reservedme/o_nas.html')
 
-def base(request):
-    return render(request, 'reservedme/base.html')
-
 def profil(request):
     return render(request, 'reservedme/profil.html')
 
 def rejestracja(request):
     return render(request, 'reservedme/rejestracja.html')
 
-def rezerwacja(request):
-    return render(request, 'reservedme/rezerwacja.html')
-
 def logowanie(request):
     return render(request, 'reservedme/logowanie.html')
 
+
+# Strony widoczne po zalogowaniu
+
+@login_required
 def add_hotel_view(request):
     return render(request, 'reservedme/add_hotel.html')
 
+@login_required
 def manage_rooms(request):
     return render(request, 'reservedme/manage_rooms.html')
 
+@login_required
 def favourite_hotels_view(request):
     return render(request, 'reservedme/favourite_hotels.html')
 
+@login_required
 def my_reservations_view(request):
     return render(request, 'reservedme/my_reservations.html')
 
+@login_required
 def profile_view(request):
     return render(request, 'reservedme/profile.html')
 
-def base_account(request):
-    return render(request, 'reservedme/base-account.html')
 
+# Logowanie, wylogowanie oraz rejestracja użytkownikiów
 
 def logout_user(request):
      logout(request)
@@ -94,8 +106,12 @@ def register(request):
         return redirect('home')
     return render(request, 'main/users/rejestracja.html')
 
+
+
 def search(request):
     return redirect('home')
+
+# Zarządzanie hotelami
 
 # dodanie nowego hotelu
 def add_hotel(request):
@@ -129,6 +145,7 @@ def add_hotel(request):
     return render(request, 'reservedme/profil.html')
 
 
+# wyswietlanie listy hoteli danego użytkownika
 def hotel_list(request):
     hotele = Hotel.objects.filter(uzytkownik=request.user)
     return render(request, 'reservedme/hotel_list.html', {'hotele': hotele})
