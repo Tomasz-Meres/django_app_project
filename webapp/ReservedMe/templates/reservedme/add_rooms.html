@@ -3,63 +3,139 @@
 {% block title %}Twoje Konto{% endblock %}
 
 {% block content %}
-<div>
-
-    <form class="test_rooms" method="post" action="{% url 'create_room' %}">
+<div class="hotel-form">
+    <form method="post" action="{% url 'create_room' %}">
         {% csrf_token %}
-        <label for="hotel">Wybierz hotel do którego chcesz dodać pokój</label>
-        <select id="hotel" name="hotel" required>
-            <option value="" disabled selected>Wybierz</option>
-            {% for h in hotele %}
-                <option value="{{ h.id }}">
-                {{ h.nazwa }} {{ h.miasto }} {{ h.ulica }} 
-                </option>
-            {% empty %}
-            Brak hoteli do wybrania.
-            <a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a>
-            
-            {% endfor %}
-        </select>
+        
+        <h3>Dodaj pokój do hotelu</h3>
 
-        <br>
-       <label for="ile_osob">Ilu osobowy:</label>
-        <select id="ile_osob" name="ile_osob" required>
-            <option value="" disabled selected>Wybierz</option>
-            <option value="1">1 osoba</option>
-            <option value="2">2 osoby</option>
-            <option value="3">3 osoby</option>
-            <option value="4">4 osoby</option>
-            <option value="5">5 osób</option>
-        </select>
-        <br>
+        <!-- Pierwszy rząd: Wybór hotelu -->
+        <div class="form-row">
+            <div class="form-group form-group--full">
+                <label for="hotel">Wybierz hotel do którego chcesz dodać pokój</label>
+                <select id="hotel" name="hotel" required>
+                    <option value="" disabled selected>Wybierz</option>
+                    {% for h in hotele %}
+                        <option value="{{ h.id }}">
+                            {{ h.nazwa }} {{ h.miasto }} {{ h.ulica }}
+                        </option>
+                    {% empty %}
+                        <option disabled>Brak hoteli do wybrania.</option>
+                        <a href="{% url 'add_hotel'%}" class="add-hotel-link">Dodaj swój pierwszy hotel</a>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
 
-        <label for="pokoje">Ilu pokojowy:</label>
-        <select id="pokoje" name="pokoje" required>
-            <option value="" disabled selected>Wybierz</option>
-            <option value="1">1 pokój</option>
-            <option value="2">2 pokoje</option>
-            <option value="3">3 pokoje</option>
-            <option value="4">4 pokoje</option>
-        </select>
-        <br>
+        <!-- Drugi rząd: Wybór ilości osób i ilości pokoi -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="ile_osob">Ilu osobowy:</label>
+                <select id="ile_osob" name="ile_osob" required>
+                    <option value="" disabled selected>Wybierz</option>
+                    <option value="1">1 osoba</option>
+                    <option value="2">2 osoby</option>
+                    <option value="3">3 osoby</option>
+                    <option value="4">4 osoby</option>
+                    <option value="5">5 osób</option>
+                </select>
+            </div>
 
-        <label for="nr_pok">Nr. pokoju:</label>
-        <input type="int" id="nr_pok" name="nr_pok">
-        <br>
-        <label for="cena_za_noc">Cena za noc:</label>
-        <input type="number" id="cena" name="cena" required step="0.01" min="0">
-        <br>
-        <input type="submit" value="Dodaj pokój">
+            <div class="form-group">
+                <label for="pokoje">Ilu pokojowy:</label>
+                <select id="pokoje" name="pokoje" required>
+                    <option value="" disabled selected>Wybierz</option>
+                    <option value="1">1 pokój</option>
+                    <option value="2">2 pokoje</option>
+                    <option value="3">3 pokoje</option>
+                    <option value="4">4 pokoje</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Trzeci rząd: Numer pokoju i cena za noc -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nr_pok">Nr. pokoju:</label>
+                <input type="int" id="nr_pok" name="nr_pok">
+            </div>
+
+            <div class="form-group">
+                <label for="cena_za_noc">Cena za noc:</label>
+                <input type="number" id="cena" name="cena" required step="0.01" min="0">
+            </div>
+        </div>
+
+        <button type="submit">Dodaj pokój</button>
     </form>
 </div>
 
+
 <style>
-.test_rooms{
+   .hotel-form {
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 30px auto;
     background-color: white;
-    padding: 10px;
-    height: auto;
-    width: 500px;
-    font-size: 14px;
 }
+
+.hotel-form h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 30%;
+    min-width: 180px;
+}
+
+.form-group--full {
+    width: 70% !important;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+input, select {
+    width: 100%;
+    font-size: 1em;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 60%;
+}
+
+button:hover {
+    background-color: #45aF49;
+}
+ 
 </style>
 {% endblock %}
