@@ -1,43 +1,136 @@
 {% extends "reservedme/base-account.html" %}
 
-{% block title %}Twoje Konto{% endblock %}
+{% block title %}Dodaj Hotel{% endblock %}
 
 {% block content %}
 
-<h1>Dodawanie hotelu:</h1>
-
-<div class="new-hotel-test" style="background-color: white;">
+<div class="hotel-form">
+    <h3>Dodaj nowy hotel</h3>
     <form action="{% url 'create_hotel' %}" method="post">
         {% csrf_token %}
-        <label for="nazwa">Nazwa hotelu:</label>
-        <input type="text" id="nazwa" name="nazwa" required>
-<br>
-        <label for="miasto">Miasto:</label>
-        <input type="text" id="miasto" name="miasto" required>
-        <br>
-        <label for="ulica">Ulica:</label>
-        <input type="text" id="ulica" name="ulica" required>
-        <br>
-        <label for="kraj">Kraj:</label>
-        <input type="text" id="kraj" name="kraj">
-        <br>
-        <label for="opis">Opis:</label>
-        <input type="text" id="opis" name="opis">
-        <br>
-        <label for="telefon">Telefon:</label>
-        <input type="tel" id="telefon" name="telefon" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="zdjecie">Zdjęcie:</label>
-        <input type="text" id="zdjecie" name="zdjecie">
-        <br>
-        <input type="submit" value="Dodaj">
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nazwa">Nazwa hotelu:</label>
+                <input type="text" id="nazwa" name="nazwa" required>
+            </div>
+            <div class="form-group">
+                <label for="telefon">Telefon:</label>
+                <input type="tel" id="telefon" name="telefon" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="kraj">Kraj:</label>
+                <input type="text" id="kraj" name="kraj">
+            </div>
+            <div class="form-group">
+                <label for="miasto">Miasto:</label>
+                <input type="text" id="miasto" name="miasto" required>
+            </div>
+            <div class="form-group">
+                <label for="ulica">Ulica:</label>
+                <input type="text" id="ulica" name="ulica" required>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group" style="width: 100%;">
+                <label for="zdjecie">Zdjęcie:</label>
+                <input type="text" id="zdjecie" name="zdjecie"> 
+                <!--<input type="file" id="zdjecie" name="zdjecie">-->  
+                     
+        </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group" style="width: 100%;">
+                <label for="opis">Opis:</label>
+                <textarea id="opis" name="opis" rows="4"></textarea>
+            </div>
+        </div>
+
+        <button type="submit">Dodaj hotel</button>
     </form>
 </div>
 
 <style>
+    .hotel-form {
+        text-align: center;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 70%;
+        margin: 30px auto;
+        background-color: white;
+    }
 
+    .hotel-form h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 30%;
+        min-width: 180px;
+    }
+
+    .form-group[style*="100%"] {
+        width: 100% !important;
+    }
+
+    label {
+        margin-bottom: 5px;
+        font-size: 1.1em;
+        color: #333;
+    }
+
+    input, textarea {
+        width: 100%;
+        font-size: 1em;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+    }
+
+    textarea {
+        height: auto;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        width: 60%;
+    }
+
+    button:hover {
+        background-color: #45aF49;
+    }
 </style>
+
 {% endblock %}
