@@ -21,7 +21,8 @@ def base_account(request):
 
 # Strony widoczne bez zalogowania
 def index(request):
-    return render(request, 'reservedme/index.html')
+    hotele = Hotel.objects.all()
+    return render(request, 'reservedme/index.html', {'hotele': hotele})
 
 def kontakt(request):
     return render(request, 'reservedme/kontakt.html')
@@ -87,7 +88,7 @@ def login_user(request):
         else:
             messages.error(request, "Błędne hasło lub e-mail.")
     
-    return render(request, 'reservedme/login.html')
+    return render(request, 'reservedme/logowanie.html')
 
 def validate_password(password):
     if len(password) < 8:
