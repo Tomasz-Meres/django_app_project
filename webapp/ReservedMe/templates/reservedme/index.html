@@ -6,7 +6,7 @@
 {% block content %}
 <div class="hotel-filter">
     <h3>Wyszukaj idealny hotel</h3>
-    <form action="#" method="get">
+    <form action="{% url 'search' %}" method="get">
         {% csrf_token %}
         
         <div class="form-row">
