@@ -223,7 +223,8 @@ def all_hotel_list(request):
 
 def hotel_management(request):
     hotele = Hotel.objects.filter(uzytkownik=request.user)
-    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele})
+    pokoje = Pokoj.objects.filter(hotel__in=hotele)
+    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele, 'pokoje': pokoje})
 
 
 # Usuwanie hotelu
