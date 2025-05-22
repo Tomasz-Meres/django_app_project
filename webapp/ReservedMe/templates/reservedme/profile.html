@@ -4,11 +4,37 @@
 
 {% block content %}
 
+<h2>Moje dane:</h2>
+<form action="{% url 'profile' %}" method="post">
+{% csrf_token %}
 
-
-
-<div style="background-color: aquamarine;">
-    <p>Moje dane</p>
+<div style="background-color: white; width: 400px;">
+    
+    <h3>Nazwa użytkownika: ******** </h3>
+    <h3>Adres Email :***********</h3>
+    <h3>Numer telefonu :*******</h3>
 </div>
 
+<div style="background-color: white; width: 400px;">
+    <h2>Zmiana hasła:</h2>
+    <form>
+        <div class="haslo">
+          <label for="haslo">Stare hasło</label>
+          <input type="password" id="haslo" name="haslo">
+        </div>
+  
+        <div class="haslo">
+          <label for="nowe">Nowe hasło</label>
+          <input type="password" id="noweHaslo" name="noweHaslo" required>
+        </div>
+  
+        <div class="haslo">
+          <label for="powtorzHaslo">Powtórz nowe hasło</label>
+          <input type="password" id="powtorzHaslo" name="powtorzHaslo" required>
+        </div>
+  
+        <button type="submit" class="przycisk-zatwierdzenia">Zmień hasło</button>
+      </form>
+</div>
+</form>
 {% endblock %}
