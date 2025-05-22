@@ -22,7 +22,13 @@
                 <td>{{ h.nazwa }}</td>
                 <td>{{ h.miasto }}</td>
                 <td>{{ h.ulica }}</td>
-                <td><input type="button" value="wybierz"></td>
+                <td>
+                    <form method="post", action="{% url 'display_rooms' %}">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ h.id }}" name="hotel_id">
+                        <input type="submit" value="Wybierz">
+                    </form>
+                </td>
             </tr>
             {% empty %}
             <tr>
@@ -43,6 +49,7 @@
                 <th>Ilu pokojowy</th>
                 <th>Numer pokoju</th>
                 <th>Cena za noc</th>
+                <th></th>
             </tr>
             {% for p in pokoje %}
 
@@ -51,12 +58,18 @@
                 <td>{{ p.liczba_pokoi }}</td>
                 <td>{{ p.numer_pokoju }}</td>
                 <td>{{ p.cena_za_noc }}</td>
-                <td><input type="button" value="wybierz"></td>
+                <td><input type="button" value="Edytuj"></td>
+                <td>                
+                    <form method="POST" action="{% url 'remove_room' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="room_id" value="{{p.id}}">
+                        <input type="submit" value="Usuń">
+                    </form></td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4">Brak Pokoi do wyświetlenia.</td>
-                <td colspan="4"><a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a></td>
+                
+                
             </tr>
             {% endfor %}
 

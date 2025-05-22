@@ -5,11 +5,17 @@
 {% block content %}
 
 <div>
+    <h2>Moje hotele</h2>
     <table>
         <tr>
             <th>Nazwa</th>
             <th>Miasto</th>
             <th>Ulica</th>
+            <th>Kraj</th>
+            <th>Opis</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Zdjęcie</th>
             <th></th>
         </tr>
         {% for h in hotele %}
@@ -18,6 +24,11 @@
             <td>{{ h.nazwa }}</td>
             <td>{{ h.miasto }}</td>
             <td>{{ h.ulica }}</td>
+            <td>{{ h.kraj }}</td>
+            <td>{{ h.kraj }}</td>
+            <td>{{ h.telefon }}</td>
+            <td>{{ h.email }}</td>
+            <td>{{ h.zdjecie }}</td>
             <td>
                 <form method="POST" action="{% url 'remove_hotel' %}">
                     {% csrf_token %}
@@ -35,7 +46,55 @@
         </tr>
         {% endfor %}
 
+
+
     </table>
+    
+        <h2>Edytuj wybrany hotel</h2>
+
+        <form method="post", action="{% url 'edit_hotel' %}">
+            {% csrf_token %}
+
+             <label for="hotel">Wybierz hotel który chcesz edytowac</label>
+                <select id="hotel" name="hotel" required>
+                    <option value="" disabled selected>Wybierz</option>
+                    {% for h in hotele %}
+                        <option value="{{ h.id }}">
+                            {{ h.nazwa }} {{ h.miasto }} {{ h.ulica }}
+                        </option>
+                    {% empty %}
+                        <option disabled>Brak hoteli do wybrania.</option>
+                        <a href="{% url 'add_hotel'%}" class="add-hotel-link">Dodaj swój pierwszy hotel</a>
+                    {% endfor %}
+                </select>
+<br>
+                <label for="nazwa">Nazwa hotelu:</label>
+                <input type="text" id="nazwa" name="nazwa">
+<br>
+                <label for="telefon">Telefon:</label>
+                <input type="tel" id="telefon" name="telefon">
+<br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+<br>
+                <label for="kraj">Kraj:</label>
+                <input type="text" id="kraj" name="kraj">
+<br>
+                <label for="miasto">Miasto:</label>
+                <input type="text" id="miasto" name="miasto">
+<br>
+                <label for="ulica">Ulica:</label>
+                <input type="text" id="ulica" name="ulica">
+  <br>
+                <label for="opis">Opis:</label>
+                <textarea id="opis" name="opis" rows="4"></textarea>
+ <br>
+                <label for="zdjecie">Zdjęcie:</label>
+                <input type="text" id="zdjecie" name="zdjecie"> 
+                <!--<input type="file" id="zdjecie" name="zdjecie">-->  
+  <br>
+                <input type="submit" value="Zmień">
+        </form>
 </div>
 
 <!--
@@ -61,4 +120,62 @@
 </div>
 -->
 
+
+<style>
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+input[type="submit"] {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #c62828;
+}
+
+td a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #2196F3;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #1976D2;
+}
+
+</style>
 {% endblock %}

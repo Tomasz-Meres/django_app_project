@@ -224,7 +224,7 @@ def all_hotel_list(request):
 def hotel_management(request):
     hotele = Hotel.objects.filter(uzytkownik=request.user)
     pokoje = Pokoj.objects.filter(hotel__in=hotele)
-    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele, 'pokoje': pokoje})
+    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele})
 
 
 # Usuwanie hotelu
@@ -234,4 +234,56 @@ def remove_hotel(request):
         hotel = get_object_or_404(Hotel, pk=id)
         hotel.delete()
 
+    return redirect('hotel_list')
+
+# Wyświetlanie pokoi konkretnego hotelu
+def display_rooms(request):
+    if request.method == 'POST':
+        hotel_id = request.POST['hotel_id']
+        hotele = Hotel.objects.filter(uzytkownik=request.user)
+        display_hotel = get_object_or_404(hotele, id=hotel_id)
+        pokoje = Pokoj.objects.filter(hotel=display_hotel)
+    return render(request, 'reservedme/manage_rooms.html', {'hotele': hotele, 'pokoje': pokoje})
+
+# Usuwanie pokoju
+def remove_room(request):
+    if request.method == 'POST':
+        id = request.POST['room_id']
+        room = get_object_or_404(Pokoj, pk=id)
+        room.delete()
+    return redirect('manage_rooms')
+
+# Edytowanie hotelu
+def edit_hotel(request):
+    if request.method == 'POST':
+        id = request.POST['hotel']
+        hotel_obj = get_object_or_404(Hotel, pk=id)
+        nazwa = request.POST['nazwa']
+        miasto = request.POST['miasto']
+        ulica = request.POST['ulica']
+        opis = request.POST.get('opis') 
+        kraj = request.POST.get('kraj') 
+        email = request.POST['email']
+        nr_tel = request.POST['telefon']
+        zdjecie = request.POST['zdjecie']
+        
+
+        if nazwa:
+            hotel_obj.nazwa = nazwa
+        if miasto:
+            hotel_obj.miasto = miasto
+        if ulica:
+            hotel_obj.ulica = ulica
+        if opis:
+            hotel_obj.opis = opis
+        if kraj:
+            hotel_obj.kraj = kraj
+        if email:
+            hotel_obj.email = email
+        if nr_tel:
+            hotel_obj.telefon = nr_tel
+        if zdjecie:
+            hotel_obj.zdjecie = zdjecie
+
+        hotel_obj.save() 
     return redirect('hotel_list')
