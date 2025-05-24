@@ -1,29 +1,33 @@
 {% extends "reservedme/base-account.html" %}
-
+{% load static %}
 {% block title %}Twoje Konto{% endblock %}
+
+{% block styles %}<link rel="stylesheet" href="{% static 'reservedme/css/my_hotels.css' %}">{% endblock %}
 
 {% block content %}
 
 
 
 <div>
-    <h2>Wybierz hotel do edytowania</h2>
-    <div>
-        <table>
+<h2>Wybierz hotel do edytowania</h2>
+<div>
+    <table class="hotel-table">
+        <thead>
             <tr>
                 <th>Nazwa</th>
                 <th>Miasto</th>
                 <th>Ulica</th>
                 <th></th>
             </tr>
+        </thead>
+        <tbody>
             {% for h in hotele %}
-
             <tr>
                 <td>{{ h.nazwa }}</td>
                 <td>{{ h.miasto }}</td>
                 <td>{{ h.ulica }}</td>
                 <td>
-                    <form method="post", action="{% url 'display_rooms' %}">
+                    <form method="post" action="{% url 'display_rooms' %}">
                         {% csrf_token %}
                         <input type="hidden" value="{{ h.id }}" name="hotel_id">
                         <input type="submit" value="Wybierz">
@@ -33,14 +37,61 @@
             {% empty %}
             <tr>
                 <td colspan="4">Brak hoteli do wyświetlenia.</td>
-                <td colspan="4"><a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a>
+                </td>
             </tr>
             {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-        </table>
-    </div>
+<h2>Pokoje</h2>
+<div>
+    <table class="hotel-table">
+        <thead>
+            <tr>
+                <th>Ilu osobowy</th>
+                <th>Ilu pokojowy</th>
+                <th>Numer pokoju</th>
+                <th>Cena za noc</th>
+                <th>Edytuj</th>
+                <th>Usuń</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in pokoje %}
+            <tr>
+                <td>{{ p.ilu_osobowy }}</td>
+                <td>{{ p.liczba_pokoi }}</td>
+                <td>{{ p.numer_pokoju }}</td>
+                <td>{{ p.cena_za_noc }}</td>
+                <td>
+                    <form method="GET" action="#">
+                        <input type="submit" value="Edytuj">
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="{% url 'remove_room' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="room_id" value="{{ p.id }}">
+                        <input type="submit" value="Usuń">
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">Brak pokoi do wyświetlenia.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 
+<!--
     <h2>Pokoje</h2>
  <div>
         <table>
@@ -75,6 +126,8 @@
 
         </table>
     </div>
+-->
+
 </div>
 
 
