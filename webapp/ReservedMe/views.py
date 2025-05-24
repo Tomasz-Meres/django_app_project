@@ -213,7 +213,7 @@ def add_room(request):
 # wyswietlanie listy hoteli danego użytkownika
 def hotel_list(request):
     hotele = Hotel.objects.filter(uzytkownik=request.user)
-    return render(request, 'reservedme/hotel_list.html', {'hotele': hotele})
+    return render(request, 'reservedme/hotel_list.html', {'hotels': hotele})
 
 
 # wyswietlanie Wszystkich hoteli

@@ -1,9 +1,9 @@
 {% extends "reservedme/base-account.html" %}
-
+{% load static %}
 {% block title %}Twoje Konto{% endblock %}
-    {% block styles %}
-        <link rel="stylesheet" href="{% static 'reservedme/css/my_hotels.css' %}">
-    {% endblock %}
+
+{% block styles %}<link rel="stylesheet" href="{% static 'reservedme/css/my_hotels.css' %}">{% endblock %}
+
 
 {% block content %}
 
@@ -99,88 +99,6 @@
 </div>
 </div>
 
-<!--
-<div>
-    <h1>Lista Hoteli</h1>
-    
-    <div>
-        {% for h in hotele %}
-            <div style="border: 1px solid black; width: 400px; margin: 10px; height: auto;">
-                <h2>{{ h.nazwa }}</h2>
-                <p>Miasto: {{ h.miasto }}</p>
-                <p>Ulica: {{ h.ulica }}</p>
-                <p>Kraj: {{ h.kraj }}</p>
-                <p>Opis: {{ h.opis }}</p>
-                <p>Telefon: {{ h.telefon }}</p>
-                <p>Email: {{ h.email }}</p>
-            </div>
-        {% empty %}
-            <p>Brak hoteli do wyświetlenia.</p>
-            <p><a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a></p>
-        {% endfor %}
-    </div>
-</div>
-
-
-
-<style>
-    table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #4CAF50;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-input[type="submit"] {
-    background-color: #e53935;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #c62828;
-}
-
-td a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 6px 12px;
-    background-color: #2196F3;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-a:hover {
-    background-color: #1976D2;
-}
-
-</style>
--->
 
 
 {% endblock %}
