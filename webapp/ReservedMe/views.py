@@ -167,7 +167,7 @@ def change_password(request):
                 messages.success(request, "Hasło zostało zmienione pomyślnie.")
                 return redirect('profile')
 
-    return render(request, 'reservedme/profile')  # tam gdzie masz ten formularz
+    return render(request, 'reservedme/profile.html')  # tam gdzie masz ten formularz
 
 def search(request):
     return redirect('home')
