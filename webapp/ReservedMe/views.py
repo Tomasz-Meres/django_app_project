@@ -60,7 +60,8 @@ def my_reservations_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'reservedme/profile.html')
+    user = request.user
+    return render(request, 'reservedme/profile.html', {'user': user})
 
 @login_required
 def add_rooms(request):

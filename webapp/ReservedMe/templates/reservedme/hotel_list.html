@@ -1,55 +1,56 @@
 {% extends "reservedme/base-account.html" %}
 
 {% block title %}Twoje Konto{% endblock %}
+    {% block styles %}
+        <link rel="stylesheet" href="{% static 'reservedme/css/my_hotels.css' %}">
+    {% endblock %}
 
 {% block content %}
 
 <div>
-    <h2>Moje hotele</h2>
-    <table>
-        <tr>
-            <th>Nazwa</th>
-            <th>Miasto</th>
-            <th>Ulica</th>
-            <th>Kraj</th>
-            <th>Opis</th>
-            <th>Telefon</th>
-            <th>Email</th>
-            <th>Zdjęcie</th>
-            <th></th>
-        </tr>
-        {% for h in hotele %}
-
-        <tr>
-            <td>{{ h.nazwa }}</td>
-            <td>{{ h.miasto }}</td>
-            <td>{{ h.ulica }}</td>
-            <td>{{ h.kraj }}</td>
-            <td>{{ h.kraj }}</td>
-            <td>{{ h.telefon }}</td>
-            <td>{{ h.email }}</td>
-            <td>{{ h.zdjecie }}</td>
-            <td>
-                <form method="POST" action="{% url 'remove_hotel' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="hotel_id" value="{{h.id}}">
-                    <input type="submit" value="Usuń">
-                </form>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">Brak hoteli do wyświetlenia.</td>
-        </tr>
-        <tr>
-            <td colspan="4"><a href="{% url 'add_hotel'%}">Dodaj swój pierwszy hotel</a></td>
-        </tr>
-        {% endfor %}
-
-
-
+       <h1>Moje Hotele</h1>
+    <table class="hotel-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Miasto</th>
+                <th>Ulica</th>
+                <th>Kraj</th>
+                <th>Opis</th>
+                <th>Telefon</th>
+                <th>Email</th>
+                <th>Zdjęcie</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hotel in hotels %}
+                <tr>
+                    <td>{{ hotel.id }}</td>
+                    <td>{{ hotel.nazwa }}</td>
+                    <td>{{ hotel.miasto }}</td>
+                    <td>{{ hotel.ulica }}</td>
+                    <td>{{ hotel.kraj }}</td>
+                    <td>{{ hotel.opis|default:"Brak opisu" }}</td>
+                    <td>{{ hotel.telefon }}</td>
+                    <td>{{ hotel.email }}</td>
+                    <td>
+                        {% if hotel.zdjecie %}
+                            <img src="{{ hotel.zdjecie }}" alt="{{ hotel.nazwa }}" style="max-width: 100px; max-height: 100px;">
+                        {% else %}
+                            Brak zdjęcia
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="9">Brak hoteli do wyświetlenia.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    
+
+    <div>
         <h2>Edytuj wybrany hotel</h2>
 
         <form method="post", action="{% url 'edit_hotel' %}">
@@ -96,6 +97,7 @@
                 <input type="submit" value="Zmień">
         </form>
 </div>
+</div>
 
 <!--
 <div>
@@ -118,7 +120,7 @@
         {% endfor %}
     </div>
 </div>
--->
+
 
 
 <style>
@@ -178,4 +180,7 @@ a:hover {
 }
 
 </style>
+-->
+
+
 {% endblock %}
