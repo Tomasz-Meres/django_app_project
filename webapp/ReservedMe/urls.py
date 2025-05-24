@@ -31,6 +31,7 @@ urlpatterns = [
     path('logout_user/', views.logout_user, name="logout_user"),  # Wylogowanie używkownika
     path('register', views.register, name='register_user'), # Dodanie nowego użytkownika
     path('search', views.search, name='search'), # Szukanie hoteli w bazie danych
+    path('change_password', views.change_password, name='change_password'), # Zmiana hasła
     
     
     # Zarządzanie hotelami i rezerwacjami

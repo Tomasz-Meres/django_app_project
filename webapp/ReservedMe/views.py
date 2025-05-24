@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import CustomUser, Hotel, Pokoj, Rezerwacja
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -144,7 +144,30 @@ def register(request):
         return redirect('home')
     return render(request, 'reservedme/rejestracja.html')
 
+def change_password(request):
+    if request.method == 'POST':
+        stare_haslo = request.POST.get('haslo')
+        nowe_haslo = request.POST.get('noweHaslo')
+        powtorz_haslo = request.POST.get('powtorzHaslo')
 
+        user = request.user
+
+        if not user.check_password(stare_haslo):
+            messages.error(request, "Stare hasło jest niepoprawne.")
+        elif nowe_haslo != powtorz_haslo:
+            messages.error(request, "Nowe hasła nie są takie same.")
+        else:
+            valid, error_msg = validate_password(nowe_haslo)
+            if not valid:
+                messages.error(request, error_msg)
+            else:
+                user.set_password(nowe_haslo)
+                user.save()
+                update_session_auth_hash(request, user)  # zapobiega wylogowaniu
+                messages.success(request, "Hasło zostało zmienione pomyślnie.")
+                return redirect('profile')
+
+    return render(request, 'reservedme/profile')  # tam gdzie masz ten formularz
 
 def search(request):
     return redirect('home')

@@ -19,7 +19,7 @@
     <!-- Zmiana hasła -->
     <div class="profile-section">
         <h2>Zmiana hasła:</h2>
-        <form method="post" action="{% url 'profile' %}">
+        <form method="post" action="{% url 'change_password' %}">
             {% csrf_token %}
             <div class="form-row">
                 <div class="form-group">
@@ -34,9 +34,9 @@
                     <label for="powtorzHaslo">Powtórz nowe hasło</label>
                     <input type="password" id="powtorzHaslo" name="powtorzHaslo" required>
                 </div>
+                <input type="submit" value="Zmień hasło">
             </div>
 
-            <button type="submit">Zmień hasło</button>
         </form>
     </div>
 
@@ -99,7 +99,7 @@ input[type="password"] {
     width: 100%;
 }
 
-button {
+input[type="submit"] {
     margin-top: 20px;
     padding: 10px;
     background-color: #4CAF50;
@@ -111,7 +111,7 @@ button {
     width: 100%;
 }
 
-button:hover {
+input[type="submit"] {
     background-color: #45aF49;
 }
 </style>
