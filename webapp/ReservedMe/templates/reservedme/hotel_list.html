@@ -50,16 +50,19 @@
         </tbody>
     </table>
 
-    <div>
-        <h2>Edytuj wybrany hotel</h2>
+<div class="hotel-form">
+    <h2>Edytuj wybrany hotel</h2>
 
-        <form method="post", action="{% url 'edit_hotel' %}">
-            {% csrf_token %}
+    <form method="post" action="{% url 'edit_hotel' %}">
+        {% csrf_token %}
 
-             <label for="hotel">Wybierz hotel który chcesz edytowac</label>
+        <!-- Wybór hotelu -->
+        <div class="form-row">
+            <div class="form-group form-group--full">
+                <label for="hotel">Wybierz hotel który chcesz edytować</label>
                 <select id="hotel" name="hotel" required>
                     <option value="" disabled selected>Wybierz</option>
-                    {% for h in hotele %}
+                    {% for h in hotels %}
                         <option value="{{ h.id }}">
                             {{ h.nazwa }} {{ h.miasto }} {{ h.ulica }}
                         </option>
@@ -68,35 +71,136 @@
                         <a href="{% url 'add_hotel'%}" class="add-hotel-link">Dodaj swój pierwszy hotel</a>
                     {% endfor %}
                 </select>
-<br>
+            </div>
+        </div>
+
+        <!-- Dane podstawowe -->
+        <div class="form-row">
+            <div class="form-group">
                 <label for="nazwa">Nazwa hotelu:</label>
                 <input type="text" id="nazwa" name="nazwa">
-<br>
+            </div>
+
+            <div class="form-group">
                 <label for="telefon">Telefon:</label>
                 <input type="tel" id="telefon" name="telefon">
-<br>
+            </div>
+        </div>
+
+        <!-- Kontakt -->
+        <div class="form-row">
+            <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email">
-<br>
+            </div>
+
+            <div class="form-group">
                 <label for="kraj">Kraj:</label>
                 <input type="text" id="kraj" name="kraj">
-<br>
+            </div>
+        </div>
+
+        <!-- Lokalizacja -->
+        <div class="form-row">
+            <div class="form-group">
                 <label for="miasto">Miasto:</label>
                 <input type="text" id="miasto" name="miasto">
-<br>
+            </div>
+
+            <div class="form-group">
                 <label for="ulica">Ulica:</label>
                 <input type="text" id="ulica" name="ulica">
-  <br>
+            </div>
+        </div>
+
+        <!-- Opis -->
+        <div class="form-row">
+            <div class="form-group form-group--full">
                 <label for="opis">Opis:</label>
                 <textarea id="opis" name="opis" rows="4"></textarea>
- <br>
+            </div>
+        </div>
+
+        <!-- Zdjęcie -->
+        <div class="form-row">
+            <div class="form-group form-group--full">
                 <label for="zdjecie">Zdjęcie:</label>
-                <input type="text" id="zdjecie" name="zdjecie"> 
-                <!--<input type="file" id="zdjecie" name="zdjecie">-->  
-  <br>
-                <input type="submit" value="Zmień">
-        </form>
+                <input type="text" id="zdjecie" name="zdjecie">
+                <!-- <input type="file" id="zdjecie" name="zdjecie"> -->
+            </div>
+        </div>
+
+        <button type="submit">Zmień</button>
+    </form>
 </div>
+
+<style>
+.hotel-form {
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 30px auto;
+    background-color: white;
+}
+
+.hotel-form h2 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 30%;
+    min-width: 180px;
+}
+
+.form-group--full {
+    width: 70% !important;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    font-size: 1em;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 60%;
+}
+
+button:hover {
+    background-color: #45aF49;
+}
+</style>
 </div>
 
 
