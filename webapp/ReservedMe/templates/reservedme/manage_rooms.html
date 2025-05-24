@@ -50,7 +50,7 @@
 
 <h2>Pokoje</h2>
 <div>
-    <table class="hotel-table">
+    <table class="room-table">
         <thead>
             <tr>
                 <th>Ilu osobowy</th>
@@ -89,44 +89,6 @@
         </tbody>
     </table>
 </div>
-
-
-<!--
-    <h2>Pokoje</h2>
- <div>
-        <table>
-            <tr>
-                <th>Ilu osobowy</th>
-                <th>Ilu pokojowy</th>
-                <th>Numer pokoju</th>
-                <th>Cena za noc</th>
-                <th></th>
-            </tr>
-            {% for p in pokoje %}
-
-            <tr>
-                <td>{{ p.ilu_osobowy }}</td>
-                <td>{{ p.liczba_pokoi }}</td>
-                <td>{{ p.numer_pokoju }}</td>
-                <td>{{ p.cena_za_noc }}</td>
-                <td><input type="button" value="Edytuj"></td>
-                <td>                
-                    <form method="POST" action="{% url 'remove_room' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="room_id" value="{{p.id}}">
-                        <input type="submit" value="Usuń">
-                    </form></td>
-            </tr>
-            {% empty %}
-            <tr>
-                
-                
-            </tr>
-            {% endfor %}
-
-        </table>
-    </div>
--->
 
 </div>
 
