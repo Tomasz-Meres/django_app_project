@@ -11,7 +11,6 @@ urlpatterns = [
     path('', views.index, name='home'),  # Strona główna
     path('kontakt/', views.kontakt, name='kontakt'),  # Strona Kontakt
     path('o-nas/', views.o_nas, name='o_nas'),  # Strona O nas
-    path('profil/', views.profil, name='profil'),  # Strona profilu
     path('rejestracja/', views.rejestracja, name='rejestracja'),  # Strona z formularzem rejestracji
     path('logowanie/', views.logowanie, name='logowanie'),  # Strona z formularzem logowania
 

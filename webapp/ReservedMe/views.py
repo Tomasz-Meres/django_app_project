@@ -30,9 +30,6 @@ def kontakt(request):
 def o_nas(request):
     return render(request, 'reservedme/o_nas.html')
 
-def profil(request):
-    return render(request, 'reservedme/profil.html')
-
 def rejestracja(request):
     return render(request, 'reservedme/rejestracja.html')
 
@@ -206,7 +203,7 @@ def add_hotel(request):
         )
         
         return redirect('add_hotel')
-    return render(request, 'reservedme/profil.html')
+    return render(request, 'reservedme/profile.html')
 
 def add_room(request):
     if request.method == 'POST':
@@ -231,7 +228,7 @@ def add_room(request):
         )
         
         return redirect('add_rooms')
-    return render(request, 'reservedme/profil.html')
+    return render(request, 'reservedme/profile.html')
 
 # wyswietlanie listy hoteli danego użytkownika
 def hotel_list(request):
