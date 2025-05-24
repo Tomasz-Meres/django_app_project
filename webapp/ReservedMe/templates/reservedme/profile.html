@@ -4,37 +4,115 @@
 
 {% block content %}
 
-<h2>Moje dane:</h2>
-<form action="{% url 'profile' %}" method="post">
-{% csrf_token %}
+<div class="profile-container">
 
-<div style="background-color: white; width: 400px;">
-    
-    <h3>Nazwa użytkownika: ******** </h3>
-    <h3>Adres Email :***********</h3>
-    <h3>Numer telefonu :*******</h3>
+    <!-- Dane użytkownika -->
+    <div class="profile-section">
+        <h2>Moje dane:</h2>
+        <div class="profile-box">
+            <h3>Nazwa użytkownika: {{ user.username }}</h3>
+            <h3>Adres Email: {{ user.email }}</h3>
+            <h3>Numer telefonu: {{ user.nr_tel }}</h3>
+        </div>
+    </div>
+
+    <!-- Zmiana hasła -->
+    <div class="profile-section">
+        <h2>Zmiana hasła:</h2>
+        <form method="post" action="{% url 'profile' %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="haslo">Stare hasło</label>
+                    <input type="password" id="haslo" name="haslo" required>
+                </div>
+                <div class="form-group">
+                    <label for="noweHaslo">Nowe hasło</label>
+                    <input type="password" id="noweHaslo" name="noweHaslo" required>
+                </div>
+                <div class="form-group">
+                    <label for="powtorzHaslo">Powtórz nowe hasło</label>
+                    <input type="password" id="powtorzHaslo" name="powtorzHaslo" required>
+                </div>
+            </div>
+
+            <button type="submit">Zmień hasło</button>
+        </form>
+    </div>
+
 </div>
 
-<div style="background-color: white; width: 400px;">
-    <h2>Zmiana hasła:</h2>
-    <form>
-        <div class="haslo">
-          <label for="haslo">Stare hasło</label>
-          <input type="password" id="haslo" name="haslo">
-        </div>
-  
-        <div class="haslo">
-          <label for="nowe">Nowe hasło</label>
-          <input type="password" id="noweHaslo" name="noweHaslo" required>
-        </div>
-  
-        <div class="haslo">
-          <label for="powtorzHaslo">Powtórz nowe hasło</label>
-          <input type="password" id="powtorzHaslo" name="powtorzHaslo" required>
-        </div>
-  
-        <button type="submit" class="przycisk-zatwierdzenia">Zmień hasło</button>
-      </form>
-</div>
-</form>
+<style>
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 30px;
+}
+
+.profile-section {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: left;
+}
+
+.profile-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.profile-box h3 {
+    font-weight: normal;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="password"] {
+    padding: 8px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45aF49;
+}
+</style>
 {% endblock %}
