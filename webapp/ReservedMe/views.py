@@ -301,7 +301,7 @@ def edit_hotel(request):
         kraj = request.POST.get('kraj') 
         email = request.POST['email']
         nr_tel = request.POST['telefon']
-        zdjecie = request.POST['zdjecie']
+        zdjecie = request.FILES.get('zdjecie')
         
 
         if nazwa:
@@ -318,8 +318,17 @@ def edit_hotel(request):
             hotel_obj.email = email
         if nr_tel:
             hotel_obj.telefon = nr_tel
+        
         if zdjecie:
-            hotel_obj.zdjecie = zdjecie
+            ext = os.path.splitext(zdjecie.name)[1]  # np. ".jpg"
+            image_name = f"{uuid.uuid4().hex}{ext}"  # unikalna nazwa
+            save_path = os.path.join(settings.BASE_DIR, 'ReservedMe', 'static', 'reservedme', 'img', image_name)
+
+            with open(save_path, 'wb+') as destination:
+                for chunk in zdjecie.chunks():
+                    destination.write(chunk)
+
+            hotel_obj.zdjecie = image_name 
 
         hotel_obj.save() 
     return redirect('hotel_list')

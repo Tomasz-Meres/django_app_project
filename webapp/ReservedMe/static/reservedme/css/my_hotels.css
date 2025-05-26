@@ -66,6 +66,13 @@
     background-color: #303f9f;
 }
 
+.opis-container {
+    max-height: 200px;
+    overflow-y: auto;  
+    white-space: normal; 
+    padding: 5px;
+}
+
 @media (max-width: 768px) {
     .room-table {
         font-size: 14px;

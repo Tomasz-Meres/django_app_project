@@ -8,7 +8,7 @@
 
     <!-- Dane użytkownika -->
     <div class="profile-section">
-        <h2>Moje dane:</h2>
+        <h2>Moje dane</h2>
         <div class="profile-box">
             <h3>Nazwa użytkownika: {{ user.username }}</h3>
             <h3>Adres Email: {{ user.email }}</h3>
@@ -18,7 +18,7 @@
 
     <!-- Zmiana hasła -->
     <div class="profile-section">
-        <h2>Zmiana hasła:</h2>
+        <h2>Zmiana hasła</h2>
         <form method="post" action="{% url 'change_password' %}">
             {% csrf_token %}
             <div class="form-row">
@@ -64,7 +64,7 @@
     border-radius: 10px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     width: 400px;
-    text-align: left;
+    text-align: center;
 }
 
 .profile-section h2 {

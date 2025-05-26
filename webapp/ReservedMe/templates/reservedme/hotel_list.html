@@ -12,7 +12,6 @@
     <table class="hotel-table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nazwa</th>
                 <th>Miasto</th>
                 <th>Ulica</th>
@@ -21,17 +20,17 @@
                 <th>Telefon</th>
                 <th>Email</th>
                 <th>Zdjęcie</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {% for hotel in hotels %}
                 <tr>
-                    <td>{{ hotel.id }}</td>
                     <td>{{ hotel.nazwa }}</td>
                     <td>{{ hotel.miasto }}</td>
                     <td>{{ hotel.ulica }}</td>
                     <td>{{ hotel.kraj }}</td>
-                    <td>{{ hotel.opis|default:"Brak opisu" }}</td>
+                    <td><div class="opis-container">{{ hotel.opis|default:"Brak opisu" }}</div></td>
                     <td>{{ hotel.telefon }}</td>
                     <td>{{ hotel.email }}</td>
                     <td>
@@ -40,6 +39,13 @@
                         {% else %}
                             Brak zdjęcia
                         {% endif %}
+                    </td>
+                    <td>
+                        <form method="POST" action="{% url 'remove_hotel' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="hotel_id" value="{{ hotel.id }}">
+                            <input type="submit" value="Usuń">
+                        </form>
                     </td>
                 </tr>
             {% empty %}
@@ -53,7 +59,7 @@
 <div class="hotel-form">
     <h2>Edytuj wybrany hotel</h2>
 
-    <form method="post" action="{% url 'edit_hotel' %}">
+    <form method="post" action="{% url 'edit_hotel' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="form-row">
@@ -195,6 +201,7 @@ button {
 button:hover {
     background-color: #45aF49;
 }
+
 </style>
 </div>
 
