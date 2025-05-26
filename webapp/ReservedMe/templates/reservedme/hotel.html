@@ -7,13 +7,15 @@
 
 
 <div class="hotel-box">
-    <h2>Hotel Słoneczny</h2>
-    <p>Kraków Floriańska 15</p>
+    <h2>{{hotel.nazwa}}</h2>
+    <p>{{hotel.miasto}} {{hotel.ulica}}</p>
 
-    <img src="{% static 'ReservedMe/img/80c9bfa70b574dca9aa9167d3c93fb03.png' %}" alt="Logo" height="500px" width="500px">
+<img src="{% static 'reservedme/img/' %}{{ hotel.zdjecie }}" alt="Zdjęcie hotelu {{ hotel.nazwa }}">
 
-    <p>OPIS</p>
-    <p>KONTAKT</p>
+    <p>{{hotel.opis}}</p>
+    <h4>Kontakt</h4>
+    <p>E-mail: {{hotel.email}}</p>
+    <p>Telefon: {{hotel.telefon}}</p>
 
     <h3>Wybierz swoją opcję</h3>
 
@@ -57,9 +59,6 @@
         <input type="submit" value="Zmień wyszukiwanie">
     </form>
 </div>
-
-
-
 
     <table>
         <tr>

@@ -11,40 +11,16 @@
         
         <div class="form-row">
             <div class="form-group">
+                <label for="city">Miasto</label>
+                <input type="text" id="city" name="city" placeholder="np. Kraków" required />
+            </div>
+            <div class="form-group">
                 <label for="checkin">Zameldowanie</label>
                 <input type="date" id="checkin" name="checkin" required />
             </div>
             <div class="form-group">
                 <label for="checkout">Wymeldowanie</label>
                 <input type="date" id="checkout" name="checkout" required />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="city">Miasto</label>
-                <input type="text" id="city" name="city" placeholder="np. Kraków" required />
-            </div>
-            <div class="form-group">
-                <label for="guests">Liczba osób</label>
-                <select id="guests" name="guests">
-                    <option value="" disabled selected>Wybierz</option>
-                    <option value="1">1 osoba</option>
-                    <option value="2">2 osoby</option>
-                    <option value="3">3 osoby</option>
-                    <option value="4">4 osoby</option>
-                    <option value="5">5 osób</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="rooms">Liczba pokoi</label>
-                <select id="rooms" name="rooms">
-                    <option value="" disabled selected>Wybierz</option>
-                    <option value="1">1 pokój</option>
-                    <option value="2">2 pokoje</option>
-                    <option value="3">3 pokoje</option>
-                    <option value="4">4 pokoje</option>
-                </select>
             </div>
         </div>
 
@@ -62,8 +38,9 @@
                     <p> {{ h.miasto }} {{ h.ulica }}</p>
                 </div>
                 <p class="phone">Telefon: {{ h.telefon }}</p>
-                <form action="#" method="post">
-                       {% csrf_token %}
+                <form action="{% url 'hotel_view' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{h.id}}" id="hotel_id" name="hotel_id">
                     <input type="submit" value="Zobacz dostępność">
                 </form>
             </div>
@@ -185,7 +162,7 @@
   margin-top: 0;
 }
 
-/* Układ lokalizacji: miasto i ulica obok siebie */
+
 .location {
   display: flex;
   gap: 8px;
@@ -206,7 +183,7 @@
 }
 
 .hotel-display form input[type="submit"]:hover {
-    background-color: #0056b3; /* ciemniejszy zielony na hover */
+    background-color: #0056b3; 
 }
 
 .hotel-display h2 {

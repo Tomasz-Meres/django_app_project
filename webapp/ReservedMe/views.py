@@ -345,4 +345,10 @@ def edit_hotel(request):
 
 
 def hotel_view(request):
-    return render(request, 'reservedme/hotel.html')
+    if request.method == 'POST':
+        id = request.POST['hotel_id']
+        hotel = get_object_or_404(Hotel, pk=id)
+    return render(request, 'reservedme/hotel.html', {'hotel': hotel})
+
+def search_rooms(request):
+    return True
