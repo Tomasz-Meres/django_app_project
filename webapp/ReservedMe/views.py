@@ -332,3 +332,7 @@ def edit_hotel(request):
 
         hotel_obj.save() 
     return redirect('hotel_list')
+
+
+def hotel_view(request):
+    return render(request, 'reservedme/hotel.html')

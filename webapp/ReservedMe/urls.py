@@ -13,7 +13,7 @@ urlpatterns = [
     path('o-nas/', views.o_nas, name='o_nas'),  # Strona O nas
     path('rejestracja/', views.rejestracja, name='rejestracja'),  # Strona z formularzem rejestracji
     path('logowanie/', views.logowanie, name='logowanie'),  # Strona z formularzem logowania
-
+    path('hotel/', views.hotel_view, name='hotel_view'),  # Strona hotelu
 
     # Strony widoczne po zalogowaniu
     path('dodaj-hotel/', views.add_hotel_view, name='add_hotel'),  # Strona z formularzem dodawania nowego hotelu
