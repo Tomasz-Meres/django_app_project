@@ -1,5 +1,5 @@
 {% extends "reservedme/base.html" %}
-
+{% load static %}
 {% block title %}Twoje Konto{% endblock %}
 
 {% block content %}
@@ -8,31 +8,138 @@
 
 <div class="hotel-box">
     <h2>Hotel Słoneczny</h2>
-    <p>Miasto: Kraków</p>
-    <p>Ulica: Floriańska 15</p>
+    <p>Kraków Floriańska 15</p>
 
-    <img src="sciezka/do/zdjecia.jpg" alt="Zdjęcie hotelu" width="300" height="200">
+    <img src="{% static 'ReservedMe/img/80c9bfa70b574dca9aa9167d3c93fb03.png' %}" alt="Logo" height="500px" width="500px">
 
     <p>OPIS</p>
+    <p>KONTAKT</p>
 
-    <form action="/rezerwuj/" method="POST">
+    <h3>Wybierz swoją opcję</h3>
+
+<div class="hotel-filter">
+    <form action="{% url 'search' %}" method="get">
         {% csrf_token %}
-        <label for="checkin">Data zameldowania:</label>
-        <input type="date" id="checkin" name="checkin">
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="checkin">Zameldowanie</label>
+                <input type="date" id="checkin" name="checkin" required />
+            </div>
+            <div class="form-group">
+                <label for="checkout">Wymeldowanie</label>
+                <input type="date" id="checkout" name="checkout" required />
+            </div>
+        </div>
 
-        <label for="checkout">Data wymeldowania:</label>
-        <input type="date" id="checkout" name="checkout">
 
-        <label for="people">Liczba osób:</label>
-        <input type="number" id="people" name="people" min="1">
+            <div class="form-group">
+                <label for="guests">Liczba osób</label>
+                <select id="guests" name="guests">
+                    <option value="" disabled selected>Wybierz</option>
+                    <option value="1">1 osoba</option>
+                    <option value="2">2 osoby</option>
+                    <option value="3">3 osoby</option>
+                    <option value="4">4 osoby</option>
+                    <option value="5">5 osób</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rooms">Liczba pokoi</label>
+                <select id="rooms" name="rooms">
+                    <option value="" disabled selected>Wybierz</option>
+                    <option value="1">1 pokój</option>
+                    <option value="2">2 pokoje</option>
+                    <option value="3">3 pokoje</option>
+                    <option value="4">4 pokoje</option>
+                </select>
+            </div>
+       
 
-        <label for="rooms">Liczba pokoi:</label>
-        <input type="number" id="rooms" name="rooms" min="1">
-
-        <input type="submit" value="Zarezerwuj">
+        <input type="submit" value="Zmień wyszukiwanie">
     </form>
 </div>
 
 
 
+    <table>
+        <tr>
+            <th>liczba gości</th>
+            <th>Liczba pokoi</th>
+            <th>Cena za noc</th>
+            <th>Cena za X nocy</th>
+            <th>rezerwacja</th>
+        </tr>
+    </table>
+
+
+
+
+<style>
+    .hotel-box {
+    width: 60%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+.hotel-box h2 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.hotel-box p {
+    margin: 6px 0;
+    color: #333;
+}
+
+.hotel-box img {
+    display: block;
+    width: 100%;            /* zdjęcie na całą szerokość kontenera */
+    height: auto;           /* zachowanie proporcji */
+    max-height: 500px;      /* opcjonalnie: maksymalna wysokość */
+    object-fit: cover;      /* dopasowanie i przycięcie zdjęcia */
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.hotel-box table {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: collapse;
+}
+
+.hotel-box table th,
+.hotel-box table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.hotel-box table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+ .hotel-filter {
+        text-align: center;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 50%;
+        margin: 20px auto;
+        background-color: white;
+    }
+
+    .hotel-filter h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+
+</style>
 {% endblock %}
