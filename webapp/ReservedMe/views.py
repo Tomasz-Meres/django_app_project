@@ -9,7 +9,7 @@ from django.conf import settings
 import re
 import os
 import uuid
-
+from datetime import date
 
 # Create your views here.
 
@@ -166,10 +166,20 @@ def change_password(request):
                 messages.success(request, "Hasło zostało zmienione pomyślnie.")
                 return redirect('profile')
 
-    return render(request, 'reservedme/profile.html')  # tam gdzie masz ten formularz
+    return render(request, 'reservedme/profile.html') 
 
 def search(request):
     return redirect('home')
+
+def search_check(checkin, checkout):
+    today = date.today()
+    if checkin > checkout:
+        return False, 'Data zameldowania jest większa od daty wymeldowania'
+    if checkin < today:
+        return False, 'Data zameldowania jest mniejsza od dzisiejszej daty'
+    if checkout < today:
+        return False, 'Data wymeldowania jest mniejsza od dzisiejszej daty'
+    return True
 
 # Zarządzanie hotelami
 
@@ -193,7 +203,7 @@ def add_hotel(request):
             opis = 'Brak opisu'
         
         if zdjecie:
-            ext = os.path.splitext(zdjecie.name)[1]  # np. ".jpg"
+            ext = os.path.splitext(zdjecie.name)[1]  
             image_name = f"{uuid.uuid4().hex}{ext}"  # unikalna nazwa
             save_path = os.path.join(settings.BASE_DIR, 'ReservedMe', 'static', 'reservedme', 'img', image_name)
 
