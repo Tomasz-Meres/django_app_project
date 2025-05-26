@@ -5,8 +5,10 @@ from django.contrib.auth import login, logout, authenticate, update_session_auth
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 import re
-
+import os
+import uuid
 
 
 # Create your views here.
@@ -181,13 +183,26 @@ def add_hotel(request):
         kraj = request.POST.get('kraj') 
         email = request.POST['email']
         nr_tel = request.POST['telefon']
-       # zdjecie = request.POST['zdjecie']
-        
+        zdjecie = request.FILES.get('zdjecie')
+
+        image_name = ''
         if not kraj:
             kraj = 'Polska' 
 
         if not opis:
             opis = 'Brak opisu'
+        
+        if zdjecie:
+            ext = os.path.splitext(zdjecie.name)[1]  # np. ".jpg"
+            image_name = f"{uuid.uuid4().hex}{ext}"  # unikalna nazwa
+            save_path = os.path.join(settings.BASE_DIR, 'ReservedMe', 'static', 'reservedme', 'img', image_name)
+
+            with open(save_path, 'wb+') as destination:
+                for chunk in zdjecie.chunks():
+                    destination.write(chunk)
+            zdjecie_nazwa = image_name
+        else:
+            zdjecie_nazwa = ''
 
         Hotel.objects.create(
             uzytkownik= request.user,
@@ -198,13 +213,13 @@ def add_hotel(request):
             opis=opis,
             telefon=nr_tel,
             email=email, 
-            # zdjecie=zdjecie
-             
+            zdjecie=zdjecie_nazwa
         )
         
         return redirect('add_hotel')
     return render(request, 'reservedme/profile.html')
 
+# dodanie pokoju do hotelu
 def add_room(request):
     if request.method == 'POST':
         hotel_id = request.POST['hotel']
@@ -241,7 +256,7 @@ def all_hotel_list(request):
     hotele = Hotel.objects.all()
     return render(request, 'reservedme/index.html', {'hotele': hotele})
 
-
+# Wyświetlanie pokoi dla wybranego hotelu
 def hotel_management(request):
     hotele = Hotel.objects.filter(uzytkownik=request.user)
     pokoje = Pokoj.objects.filter(hotel__in=hotele)

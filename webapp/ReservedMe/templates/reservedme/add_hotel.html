@@ -6,7 +6,7 @@
   
 <div class="hotel-form">
     <h3>Dodaj nowy hotel</h3>
-    <form action="{% url 'create_hotel' %}" method="post">
+    <form action="{% url 'create_hotel' %}" method="post"  enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="form-row">
@@ -44,8 +44,8 @@
         <div class="form-row">
             <div class="form-group" style="width: 100%;">
                 <label for="zdjecie">Zdjęcie:</label>
-                <input type="text" id="zdjecie" name="zdjecie"> 
-                <!--<input type="file" id="zdjecie" name="zdjecie">-->  
+                <input type="file" id="zdjecie" name="zdjecie" accept="image/*"> 
+
                      
         </div>
         </div>

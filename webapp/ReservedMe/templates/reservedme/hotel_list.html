@@ -36,7 +36,7 @@
                     <td>{{ hotel.email }}</td>
                     <td>
                         {% if hotel.zdjecie %}
-                            <img src="{{ hotel.zdjecie }}" alt="{{ hotel.nazwa }}" style="max-width: 100px; max-height: 100px;">
+                            <img src="{% static 'reservedme/img/' %}{{ hotel.zdjecie }}" alt="Zdjęcie hotelu" width="200px" height="200px">
                         {% else %}
                             Brak zdjęcia
                         {% endif %}
@@ -56,7 +56,6 @@
     <form method="post" action="{% url 'edit_hotel' %}">
         {% csrf_token %}
 
-        <!-- Wybór hotelu -->
         <div class="form-row">
             <div class="form-group form-group--full">
                 <label for="hotel">Wybierz hotel który chcesz edytować</label>
@@ -74,7 +73,6 @@
             </div>
         </div>
 
-        <!-- Dane podstawowe -->
         <div class="form-row">
             <div class="form-group">
                 <label for="nazwa">Nazwa hotelu:</label>
@@ -87,7 +85,6 @@
             </div>
         </div>
 
-        <!-- Kontakt -->
         <div class="form-row">
             <div class="form-group">
                 <label for="email">Email:</label>
@@ -100,7 +97,6 @@
             </div>
         </div>
 
-        <!-- Lokalizacja -->
         <div class="form-row">
             <div class="form-group">
                 <label for="miasto">Miasto:</label>
@@ -113,7 +109,7 @@
             </div>
         </div>
 
-        <!-- Opis -->
+
         <div class="form-row">
             <div class="form-group form-group--full">
                 <label for="opis">Opis:</label>
@@ -121,12 +117,11 @@
             </div>
         </div>
 
-        <!-- Zdjęcie -->
+
         <div class="form-row">
             <div class="form-group form-group--full">
                 <label for="zdjecie">Zdjęcie:</label>
-                <input type="text" id="zdjecie" name="zdjecie">
-                <!-- <input type="file" id="zdjecie" name="zdjecie"> -->
+                <input type="file" id="zdjecie" name="zdjecie" accept="image/*"> 
             </div>
         </div>
 
