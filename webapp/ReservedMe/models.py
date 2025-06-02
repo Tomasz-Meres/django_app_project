@@ -59,6 +59,11 @@ class Rezerwacja(models.Model):
         on_delete=models.CASCADE,
         related_name="rezerwacje"
     )
+    uzytkownik = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="rezerwacje"
+    )
     data_rozpoczecia= models.DateField()
     data_zakonczenia = models.DateField()
     calkowita_cena = models.DecimalField(max_digits=10, decimal_places=2)

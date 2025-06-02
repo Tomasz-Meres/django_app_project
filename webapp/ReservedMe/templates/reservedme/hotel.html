@@ -58,6 +58,11 @@
 
         <input type="submit" value="Zmień wyszukiwanie">
     </form>
+    {% if error %}
+    <div style="color: red; font-weight: bold;">
+        {{ error }}
+    </div>
+{% endif %}
 </div>
 
     <table>
@@ -65,16 +70,26 @@
             <th>liczba gości</th>
             <th>Liczba pokoi</th>
             <th>Cena za noc</th>
-            <th>Cena za X nocy</th>
-            <th>rezerwacja</th>
+            <th>Cena za {{daty.dni_pobytu}} nocy</th>
+            <th></th>
         </tr>
-         {% for p in pokoje %}
+         {% for w in wyniki %}
             <tr>
-                <td>{{ p.ilu_osobowy }}</td>
-                <td>{{ p.liczba_pokoi }}</td>
-                <td>{{ p.cena_za_noc }}</td>
-                <td></td>
-                <td></td>
+                <td>{{ w.pokoj.ilu_osobowy }}</td>
+                <td>{{ w.pokoj.liczba_pokoi }}</td>
+                <td>{{ w.pokoj.cena_za_noc }}</td>
+                <td>{{ w.cena_za_pobyt }}</td>
+                <td>
+                    <form method="post" action="{% url 'book_room' %}">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{hotel.id}}" name="hotel_id">
+                        <input type="hidden" value="{{w.pokoj.id}}" name="pokoj_id">
+                        <input type="hidden" value="{{w.cena_za_pobyt}}" name="price">
+                        <input type="date" value="{{ daty.checkin|date:'Y-m-d' }}" name="checkin" class="hidden-date">
+                        <input type="date" value="{{ daty.checkout|date:'Y-m-d' }}" name="checkout" class="hidden-date">
+                        <input type="submit" value="Zarezerwuj">
+                    </form>
+                </td>
             </tr>
             {% empty %}
             <tr>
@@ -195,6 +210,10 @@
 
 .rooms-filter input[type="submit"]:hover {
     background-color: #191970;
+}
+
+.hidden-date {
+  display: none;
 }
 
 </style>

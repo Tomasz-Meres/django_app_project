@@ -10,6 +10,7 @@ import re
 import os
 import uuid
 from datetime import datetime, date
+from decimal import Decimal
 
 # Create your views here.
 
@@ -55,6 +56,7 @@ def favourite_hotels_view(request):
 
 @login_required
 def my_reservations_view(request):
+    rezerwacje = Rezerwacja.objects.filter()
     return render(request, 'reservedme/my_reservations.html')
 
 @login_required
@@ -179,7 +181,9 @@ def search_check(checkin, checkout):
         return False, 'Data zameldowania jest mniejsza od dzisiejszej daty'
     if checkout < today:
         return False, 'Data wymeldowania jest mniejsza od dzisiejszej daty'
-    return True
+    return True, ''
+
+
 
 # Zarządzanie hotelami
 
@@ -350,13 +354,26 @@ def hotel_view(request):
         hotel = get_object_or_404(Hotel, pk=hotel_id)
         pokoje = Pokoj.objects.filter(hotel_id=hotel_id)
 
-        checkin = request.GET.get('checkin')
-        checkout = request.GET.get('checkout')
+        start = request.GET.get('checkin')
+        end = request.GET.get('checkout')
         guests = request.GET.get('guests')
         rooms = request.GET.get('rooms')
-        days = roznica_w_dniach(checkin, checkout)
+        wyniki = []
+        dni_pobytu = 0
+        daty = {}
 
-        if checkin and checkout:
+        # Sprawdzenie dat
+        if start and end:
+            checkin = datetime.strptime(start, '%Y-%m-%d').date() 
+            checkout = datetime.strptime(end, '%Y-%m-%d').date() 
+
+            valid, message = search_check(checkin, checkout)
+            if not valid:
+                # Zwróć odpowiedź z błędem lub renderuj z komunikatem
+                return render(request, 'reservedme/hotel.html', {'hotel': hotel, 'pokoje': pokoje,
+                    'error': message,
+                })
+
             sql = """
                 SELECT p.id, p.hotel_id, p.*
                 FROM ReservedMe_Pokoj p
@@ -380,18 +397,25 @@ def hotel_view(request):
                 AND p.liczba_pokoi = %s;
             """
             params = [checkin, checkin, checkout, checkout, hotel_id, guests, rooms]
+            
             pokoje = Pokoj.objects.raw(sql, params)
+            dni_pobytu = (checkout - checkin).days
+            daty = {'checkin': checkin,
+                    'checkout': checkout,
+                    'dni_pobytu': dni_pobytu}
+            wyniki = []
+            for pokoj in pokoje:
+                if dni_pobytu:
+                    cena_za_pobyt = pokoj.cena_za_noc * dni_pobytu
+                else:
+                    cena_za_pobyt = pokoj.cena_za_noc
+                wyniki.append({
+                    'pokoj': pokoj,
+                    'cena_za_pobyt': cena_za_pobyt
+                })  
 
 
-
-    return render(request, 'reservedme/hotel.html', {'hotel': hotel, 'pokoje': pokoje})
-
-def roznica_w_dniach(data_start_str, data_end_str):
-    format = "%Y-%m-%d"  # standardowy format input type="date"
-    data_start = datetime.strptime(data_start_str, format).date()
-    data_end = datetime.strptime(data_end_str, format).date()
-    delta = data_end - data_start
-    return delta.days
+    return render(request, 'reservedme/hotel.html', {'hotel': hotel, 'pokoje': pokoje, 'wyniki': wyniki, 'daty': daty})
 
 
 def search_rooms(request):
@@ -404,3 +428,28 @@ def search_rooms(request):
 
         q = f''
     return redirect('hotel_view')
+
+def book_room(request):
+    if request.method == 'POST':
+        hotel_id = request.POST['hotel_id']
+        pokoj_id = request.POST['pokoj_id']
+        hotel = get_object_or_404(Hotel, pk=hotel_id)
+        pokoj = get_object_or_404(Pokoj, pk=pokoj_id)
+        user = request.user
+
+        price_str = request.POST['price']
+        price = price_str.replace(',', '.').strip()
+
+        start = request.POST['checkin']
+        end = request.POST['checkout']
+        checkin = datetime.strptime(start, '%Y-%m-%d').date() 
+        checkout = datetime.strptime(end, '%Y-%m-%d').date() 
+        
+
+        Rezerwacja.objects.create(
+            hotel=hotel, pokoj=pokoj, uzytkownik=user, 
+            data_rozpoczecia=checkin, data_zakonczenia=checkout, 
+            calkowita_cena=Decimal(price), data_wykonania=date.today()
+        )
+        return redirect('profile')
+    return render(request, 'reservedme/index.html')
