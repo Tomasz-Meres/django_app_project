@@ -20,9 +20,9 @@
     <h3>Wybierz swoją opcję</h3>
 
 <div class="rooms-filter">
-    <form action="{% url 'search' %}" method="get">
+    <form action="{% url 'hotel_view' %}" method="get">
         {% csrf_token %}
-
+        <input type="hidden" value="{{hotel.id}}" id="hotel_id" name="hotel_id">
         <div class="form-group">
             <label for="checkin">Zameldowanie</label>
             <input type="date" id="checkin" name="checkin" required />
@@ -68,6 +68,19 @@
             <th>Cena za X nocy</th>
             <th>rezerwacja</th>
         </tr>
+         {% for p in pokoje %}
+            <tr>
+                <td>{{ p.ilu_osobowy }}</td>
+                <td>{{ p.liczba_pokoi }}</td>
+                <td>{{ p.cena_za_noc }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Brak pokoi do wyświetlenia.</td>
+            </tr>
+            {% endfor %}
     </table>
 
 </div>

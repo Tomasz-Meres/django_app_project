@@ -9,7 +9,7 @@ from django.conf import settings
 import re
 import os
 import uuid
-from datetime import date
+from datetime import datetime, date
 
 # Create your views here.
 
@@ -345,10 +345,62 @@ def edit_hotel(request):
 
 
 def hotel_view(request):
-    if request.method == 'POST':
-        id = request.POST['hotel_id']
-        hotel = get_object_or_404(Hotel, pk=id)
-    return render(request, 'reservedme/hotel.html', {'hotel': hotel})
+    if request.method == 'GET':
+        hotel_id = request.GET['hotel_id']
+        hotel = get_object_or_404(Hotel, pk=hotel_id)
+        pokoje = Pokoj.objects.filter(hotel_id=hotel_id)
+
+        checkin = request.GET.get('checkin')
+        checkout = request.GET.get('checkout')
+        guests = request.GET.get('guests')
+        rooms = request.GET.get('rooms')
+        days = roznica_w_dniach(checkin, checkout)
+
+        if checkin and checkout:
+            sql = """
+                SELECT p.id, p.hotel_id, p.*
+                FROM ReservedMe_Pokoj p
+                JOIN ReservedMe_Hotel h ON h.id = p.hotel_id
+                WHERE p.id NOT IN (
+                    SELECT r.pokoj_id
+                    FROM ReservedMe_Rezerwacja r
+                    JOIN ReservedMe_Pokoj p2 ON r.pokoj_id = p2.id
+                    WHERE r.id IS NOT NULL
+                    AND (%s >= r.data_rozpoczecia AND %s < r.data_zakonczenia)
+                )
+                AND p.id NOT IN (
+                    SELECT r.pokoj_id
+                    FROM ReservedMe_Rezerwacja r
+                    JOIN ReservedMe_Pokoj p2 ON r.pokoj_id = p2.id
+                    WHERE r.id IS NOT NULL
+                    AND (%s >= r.data_rozpoczecia AND %s < r.data_zakonczenia)
+                )
+                AND p.hotel_id = %s
+                AND p.ilu_osobowy = %s
+                AND p.liczba_pokoi = %s;
+            """
+            params = [checkin, checkin, checkout, checkout, hotel_id, guests, rooms]
+            pokoje = Pokoj.objects.raw(sql, params)
+
+
+
+    return render(request, 'reservedme/hotel.html', {'hotel': hotel, 'pokoje': pokoje})
+
+def roznica_w_dniach(data_start_str, data_end_str):
+    format = "%Y-%m-%d"  # standardowy format input type="date"
+    data_start = datetime.strptime(data_start_str, format).date()
+    data_end = datetime.strptime(data_end_str, format).date()
+    delta = data_end - data_start
+    return delta.days
+
 
 def search_rooms(request):
-    return True
+    if request.method == 'GET':
+        checkin = request.GET['checkin']
+        checkout = request.GET['checkout']
+        guests = request.GET['guests']
+        rooms = request.GET['rooms']
+
+
+        q = f''
+    return redirect('hotel_view')

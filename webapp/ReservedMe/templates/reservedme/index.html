@@ -38,7 +38,7 @@
                     <p> {{ h.miasto }} {{ h.ulica }}</p>
                 </div>
                 <p class="phone">Telefon: {{ h.telefon }}</p>
-                <form action="{% url 'hotel_view' %}" method="post">
+                <form action="{% url 'hotel_view' %}" method="get">
                     {% csrf_token %}
                     <input type="hidden" value="{{h.id}}" id="hotel_id" name="hotel_id">
                     <input type="submit" value="Zobacz dostępność">

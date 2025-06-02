@@ -44,6 +44,8 @@ class Pokoj(models.Model):
     liczba_pokoi = models.IntegerField()
     numer_pokoju = models.IntegerField()
     cena_za_noc = models.DecimalField(max_digits=10, decimal_places=2)
+    def cena_za_pobyt(self, liczba_nocy):
+        return self.cena_za_noc * liczba_nocy    
 
 # Model dla rezerwacji
 class Rezerwacja(models.Model):

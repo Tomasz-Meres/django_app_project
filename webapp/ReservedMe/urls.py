@@ -41,4 +41,6 @@ urlpatterns = [
     path('remove_room', views.remove_room, name='remove_room'),
     path('edit_hotel', views.edit_hotel, name='edit_hotel'),
    
+
+    path('search_rooms', views.search_rooms, name='search_rooms'),
 ]
