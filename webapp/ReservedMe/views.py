@@ -51,13 +51,56 @@ def manage_rooms(request):
     return render(request, 'reservedme/manage_rooms.html')
 
 @login_required
-def favourite_hotels_view(request):
-    return render(request, 'reservedme/favourite_hotels.html')
-
-@login_required
 def my_reservations_view(request):
-    rezerwacje = Rezerwacja.objects.filter()
-    return render(request, 'reservedme/my_reservations.html')
+    user = request.user.id
+
+    sql = """
+            SELECT
+                r.id,
+                h.nazwa,
+                h.miasto,
+                h.ulica,
+                p.ilu_osobowy,
+                r.calkowita_cena,
+                r.data_rozpoczecia,
+                r.data_zakonczenia,
+                r.data_wykonania,
+                h.telefon
+            FROM
+                ReservedMe_Rezerwacja r
+            JOIN ReservedMe_Hotel h ON r.hotel_id = h.id
+            JOIN ReservedMe_Pokoj p ON r.pokoj_id = p.id
+            WHERE r.uzytkownik_id = %s
+            """
+    params = [user]
+    
+    my_reservations = Rezerwacja.objects.raw(sql, params) 
+
+
+    sql1 = """
+        SELECT
+            r.id,
+            h.nazwa,
+            h.miasto,
+            h.ulica,
+            p.ilu_osobowy,
+            r.calkowita_cena,
+            r.data_rozpoczecia,
+            r.data_zakonczenia,
+            r.data_wykonania,
+            u.nr_tel,
+            u.first_name,
+            u.last_name
+        FROM ReservedMe_Rezerwacja r
+        JOIN ReservedMe_Hotel h ON r.hotel_id = h.id
+        JOIN ReservedMe_Pokoj p ON r.pokoj_id = p.id
+        JOIN ReservedMe_CustomUser u ON r.uzytkownik_id = u.id
+        WHERE h.uzytkownik_id = %s
+    """
+
+    params1 = [user]  
+    hotel_reservations = Rezerwacja.objects.raw(sql1, params1) 
+    return render(request, 'reservedme/my_reservations.html', {'my_reservations': my_reservations, 'hotel_reservations': hotel_reservations})
 
 @login_required
 def profile_view(request):

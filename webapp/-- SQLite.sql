@@ -6,4 +6,4 @@ SELECT * FROM ReservedMe_Hotel
 
 SELECT * FROM ReservedMe_Pokoj
 */
-SELECT * FROM ReservedMe_Rezerwacja
+SELECT * FROM ReservedMe_CustomUser
