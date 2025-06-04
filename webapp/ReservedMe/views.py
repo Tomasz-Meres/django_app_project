@@ -522,7 +522,9 @@ def book_room(request):
         return redirect('my_reservations')
     return render(request, 'reservedme/index.html')
 
-
-def search(request):
-
-    return redirect('home')
+def delete_reservation(request):
+    if request.method == 'POST':
+        reservation_id = request.POST['reservation']
+        rezervation = get_object_or_404(Rezerwacja, pk=reservation_id)
+        rezervation.delete()
+    return redirect('my_reservations')

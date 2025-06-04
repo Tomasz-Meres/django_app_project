@@ -28,7 +28,6 @@ urlpatterns = [
     path('login_user/', views.login_user, name='login_user'),  # Logowanie użytkownika
     path('logout_user/', views.logout_user, name="logout_user"),  # Wylogowanie używkownika
     path('register', views.register, name='register_user'), # Dodanie nowego użytkownika
-    path('search', views.search, name='search'), # Szukanie hoteli w bazie danych
     path('change_password', views.change_password, name='change_password'), # Zmiana hasła
     
     
@@ -42,4 +41,5 @@ urlpatterns = [
 
 
     path('book_room', views.book_room, name='book_room'), # rezerwacja pokoju
+    path('delete_reservation', views.delete_reservation, name='delete_reservation'), # rezerwacja pokoju
 ]

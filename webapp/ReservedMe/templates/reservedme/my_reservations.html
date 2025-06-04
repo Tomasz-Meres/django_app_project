@@ -17,6 +17,7 @@
             <th>Cena Całkowita</th>
             <th>Zarezerwowano</th>
             <th>Kontakt</th>
+            <th></th>
         </tr>
         {% for r in my_reservations %}
         <tr>
@@ -27,6 +28,14 @@
             <td>{{ r.calkowita_cena }} zł</td>
             <td>{{ r.data_wykonania }}</td>
             <td>{{ r.telefon }}</td>
+            <td>
+                <form method="post" action="{% url 'delete_reservation' %}">
+                    {% csrf_token %}
+
+                    <input type="hidden" value="{{r.id}}" name="reservation">
+                    <input type="submit" value="Anuluj rezerwację">
+                </form>
+            </td>
         </tr>
         {% empty %}
         <tr>
@@ -118,6 +127,27 @@
         text-align: center;
         font-style: italic;
         color: #888;
+    }
+
+    td form {
+        margin: 0;
+    }
+
+    td form input[type="submit"] {
+        background-color: #e74c3c;
+        /* czerwony */
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    td form input[type="submit"]:hover {
+        background-color: #c0392b;
+        /* ciemniejszy czerwony przy hover */
     }
 </style>
 
