@@ -57,7 +57,6 @@
                 <th>Ilu pokojowy</th>
                 <th>Numer pokoju</th>
                 <th>Cena za noc</th>
-                <th>Edytuj</th>
                 <th>Usuń</th>
             </tr>
         </thead>
@@ -68,11 +67,6 @@
                 <td>{{ p.liczba_pokoi }}</td>
                 <td>{{ p.numer_pokoju }}</td>
                 <td>{{ p.cena_za_noc }}</td>
-                <td>
-                    <form method="GET" action="#">
-                        <input type="submit" value="Edytuj">
-                    </form>
-                </td>
                 <td>
                     <form method="POST" action="{% url 'remove_room' %}">
                         {% csrf_token %}

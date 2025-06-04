@@ -38,8 +38,8 @@ urlpatterns = [
     path('create_room', views.add_room, name='create_room'), # dodanie nowego hotelu
     path('remove_hotel', views.remove_hotel, name='remove_hotel'), # dodanie nowego hotelu
     path('display_rooms', views.display_rooms, name='display_rooms'), # wyswietlanie pokoi wybranego hotelu
-    path('remove_room', views.remove_room, name='remove_room'),
-    path('edit_hotel', views.edit_hotel, name='edit_hotel'),
+    path('remove_room', views.remove_room, name='remove_room'), # usuwanie pokoju
+    path('edit_hotel', views.edit_hotel, name='edit_hotel'), # edytowanie informacji o hotelu
    
 
     path('search_rooms', views.search_rooms, name='search_rooms'), # filtrowanie pokoi w hotelu

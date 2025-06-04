@@ -170,9 +170,6 @@ def change_password(request):
 
     return render(request, 'reservedme/profile.html') 
 
-def search(request):
-    return redirect('home')
-
 def search_check(checkin, checkout):
     today = date.today()
     if checkin > checkout:
@@ -451,5 +448,10 @@ def book_room(request):
             data_rozpoczecia=checkin, data_zakonczenia=checkout, 
             calkowita_cena=Decimal(price), data_wykonania=date.today()
         )
-        return redirect('profile')
+        return redirect('my_reservations')
     return render(request, 'reservedme/index.html')
+
+
+def search(request):
+
+    return redirect('home')
