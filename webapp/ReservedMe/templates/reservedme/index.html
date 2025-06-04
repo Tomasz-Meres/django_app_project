@@ -5,174 +5,187 @@
 
 {% block content %}
 <div class="hotel-filter">
-    <h3>Wyszukaj idealny hotel</h3>
-    <form action="{% url 'search' %}" method="get">
-        {% csrf_token %}
-        
-        <div class="form-row">
-            <div class="form-group">
-                <label for="city">Miasto</label>
-                <input type="text" id="city" name="city" placeholder="np. Kraków"/>
-            </div>
-            <div class="form-group">
-                <label for="checkin">Zameldowanie</label>
-                <input type="date" id="checkin" name="checkin" required />
-            </div>
-            <div class="form-group">
-                <label for="checkout">Wymeldowanie</label>
-                <input type="date" id="checkout" name="checkout" required />
-            </div>
-        </div>
+  <h3>Wyszukaj idealny hotel</h3>
+  <form action="{% url 'home' %}" method="get">
+    {% csrf_token %}
 
-        <button type="submit">Szukaj hoteli</button>
-    </form>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="city">Miasto</label>
+        <input type="text" id="city" name="city" placeholder="np. Kraków" />
+      </div>
+      <div class="form-group">
+        <label for="checkin">Zameldowanie</label>
+        <input type="date" id="checkin" name="checkin" required />
+      </div>
+      <div class="form-group">
+        <label for="checkout">Wymeldowanie</label>
+        <input type="date" id="checkout" name="checkout" required />
+      </div>
+    </div>
+          {% if error %}
+  <div style="color: red; font-weight: bold;">
+    {{ error }}
+  </div>
+  {% endif %}
+    <button type="submit">Szukaj hoteli</button>
+  </form>
+
 </div>
 
 <div class="display_hotels">
-    {% for h in hotele %}
-        <div class="hotel-display">
-            <img src="{% static 'reservedme/img/' %}{{ h.zdjecie }}" alt="Zdjęcie hotelu {{ h.nazwa }}">
-            <div class="hotel-content">
-                <h2>{{ h.nazwa }}</h2>
-                <div class="location">
-                    <p> {{ h.miasto }} {{ h.ulica }}</p>
-                </div>
-                <p class="phone">Telefon: {{ h.telefon }}</p>
-                <form action="{% url 'hotel_view' %}" method="get">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{h.id}}" id="hotel_id" name="hotel_id">
-                    <input type="submit" value="Zobacz dostępność">
-                </form>
-            </div>
-        </div>
-    {% empty %}
-    {% endfor %}
+  {% for h in hotele %}
+  <div class="hotel-display">
+    <img src="{% static 'reservedme/img/' %}{{ h.zdjecie }}" alt="Zdjęcie hotelu {{ h.nazwa }}">
+    <div class="hotel-content">
+      <h2>{{ h.nazwa }}</h2>
+      <div class="location">
+        <p> {{ h.miasto }} {{ h.ulica }}</p>
+      </div>
+      <p class="phone">Telefon: {{ h.telefon }}</p>
+      <form action="{% url 'hotel_view' %}" method="get">
+        {% csrf_token %}
+        <input type="hidden" value="{{h.id}}" id="hotel_id" name="hotel_id">
+        <input type="submit" value="Zobacz dostępność">
+      </form>
+    </div>
+  </div>
+  {% empty %}
+  {% endfor %}
 </div>
 
 <style>
-    .hotel-filter {
-        text-align: center;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        width: 50%;
-        margin: 20px auto;
-        background-color: white;
-    }
+  .hotel-filter {
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 20px auto;
+    background-color: white;
+  }
 
-    .hotel-filter h3 {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-    }
+  .hotel-filter h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
 
-    .form-row {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 15px;
-        flex-wrap: wrap;
-    }
+  .form-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
 
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 30%;
-        min-width: 150px;
-    }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 30%;
+    min-width: 150px;
+  }
 
-    label {
-        margin-bottom: 5px;
-        font-size: 1.2em;
-        color: #333;
-    }
+  label {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    color: #333;
+  }
 
-    input, select {
-        width: 100%;
-        height: 35px;
-        font-size: 1em;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+  input,
+  select {
+    width: 100%;
+    height: 35px;
+    font-size: 1em;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
-    button {
-        padding: 10px;
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        font-size: 1em;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-        width: 60%;
-    }
+  button {
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 60%;
+  }
 
-    button:hover {
-        background-color: #45aF49;
-    }
+  button:hover {
+    background-color: #45aF49;
+  }
 
   .hotel-display {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 20px;
-  width: auto;
-  box-sizing: border-box;
-  transition: transform 0.2s ease;
-  width: 70%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: auto;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+    width: 70%;
 
-  display: flex;           /* ustawienie wiersza (obrazek + tekst) */
-  gap: 15px;               /* odstęp między obrazkiem a tekstem */
-  margin: auto;
-  align-items: center;     /* wyśrodkowanie pionowe elementów */
-}
+    display: flex;
+    /* ustawienie wiersza (obrazek + tekst) */
+    gap: 15px;
+    /* odstęp między obrazkiem a tekstem */
+    margin: auto;
+    align-items: center;
+    /* wyśrodkowanie pionowe elementów */
+  }
 
-.hotel-display img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;       /* dopasowanie zdjęcia do wymiarów bez zniekształceń */
-  border-radius: 8px;
-  flex-shrink: 0;          /* obrazek nie kurczy się */
-}
+  .hotel-display img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    /* dopasowanie zdjęcia do wymiarów bez zniekształceń */
+    border-radius: 8px;
+    flex-shrink: 0;
+    /* obrazek nie kurczy się */
+  }
 
-.hotel-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* wyrównanie do lewej */
-  gap: 6px;
-}
+  .hotel-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* wyrównanie do lewej */
+    gap: 6px;
+  }
 
-.hotel-content h2 {
-  margin: 0 0 6px 0;
-  font-size: 1.6em;
-  color: #333;
-}
+  .hotel-content h2 {
+    margin: 0 0 6px 0;
+    font-size: 1.6em;
+    color: #333;
+  }
 
-.hotel-content .location {
-  font-size: 1em;
-  color: #555;
-  margin-bottom: 4px;
-}
+  .hotel-content .location {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 4px;
+  }
 
-.hotel-content .phone {
-  font-size: 1em;
-  color: #555;
-  margin-top: 0;
-}
+  .hotel-content .phone {
+    font-size: 1em;
+    color: #555;
+    margin-top: 0;
+  }
 
 
-.location {
-  display: flex;
-  gap: 8px;
-}
+  .location {
+    display: flex;
+    gap: 8px;
+  }
 
-.hotel-display form {
-    margin-left: auto; /* formularz z prawej */
-}
+  .hotel-display form {
+    margin-left: auto;
+    /* formularz z prawej */
+  }
 
-.hotel-display form input[type="submit"] {
+  .hotel-display form input[type="submit"] {
     padding: 8px 16px;
     background-color: #007BFF;
     color: white;
@@ -180,62 +193,63 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-.hotel-display form input[type="submit"]:hover {
-    background-color: #0056b3; 
-}
-
-.hotel-display h2 {
-  margin: 0 0 10px;
-  font-size: 1.5em;
-  color: #333;
-}
-
-.hotel-display p {
-  margin: 4px 0;
-  color: #555;
-  font-size: 1em;
-}
-
-.hotel-display button {
-  margin-top: auto;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.hotel-display button:hover {
-  background-color: #45a049;
-}
-
-.hotel-display:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* Responsywność - na mniejszych ekranach */
-@media (max-width: 450px) {
-  .display_hotels {
-    width: 90%;
   }
-  .hotel-display {
-    width: 100%;
-    flex-direction: column;   /* ustawienie obrazka nad tekstem na małych ekranach */
-    align-items: flex-start;
-  }
-  .hotel-display img {
-    width: 100%;
-    height: auto;
-  }
-}
 
+  .hotel-display form input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
 
+  .hotel-display h2 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+    color: #333;
+  }
+
+  .hotel-display p {
+    margin: 4px 0;
+    color: #555;
+    font-size: 1em;
+  }
+
+  .hotel-display button {
+    margin-top: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .hotel-display button:hover {
+    background-color: #45a049;
+  }
+
+  .hotel-display:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsywność - na mniejszych ekranach */
+  @media (max-width: 450px) {
+    .display_hotels {
+      width: 90%;
+    }
+
+    .hotel-display {
+      width: 100%;
+      flex-direction: column;
+      /* ustawienie obrazka nad tekstem na małych ekranach */
+      align-items: flex-start;
+    }
+
+    .hotel-display img {
+      width: 100%;
+      height: auto;
+    }
+  }
 </style>
 
 {% endblock %}

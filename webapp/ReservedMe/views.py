@@ -25,6 +25,46 @@ def base_account(request):
 # Strony widoczne bez zalogowania
 def index(request):
     hotele = Hotel.objects.all()
+    if request.method == 'GET':
+        city = request.GET.get('city')
+        start = request.GET.get('checkin')
+        end = request.GET.get('checkout')
+
+        if start and end:
+            checkin = datetime.strptime(start, '%Y-%m-%d').date() 
+            checkout = datetime.strptime(end, '%Y-%m-%d').date() 
+            valid, message = search_check(checkin, checkout)
+            if not valid:
+                return render(request, 'reservedme/index.html', {'hotele': hotele, 'error': message
+                })
+            
+            sql = """
+                SELECT h.id
+                FROM ReservedMe_Pokoj p
+                JOIN ReservedMe_Hotel h ON h.id = p.hotel_id
+                WHERE p.id NOT IN (
+                    SELECT r.pokoj_id
+                    FROM ReservedMe_Rezerwacja r
+                    JOIN ReservedMe_Pokoj p2 ON r.pokoj_id = p2.id
+                    WHERE r.id IS NOT NULL
+                    AND (%s >= r.data_rozpoczecia AND %s < r.data_zakonczenia)
+                )
+                AND p.id NOT IN (
+                    SELECT r.pokoj_id
+                    FROM ReservedMe_Rezerwacja r
+                    JOIN ReservedMe_Pokoj p2 ON r.pokoj_id = p2.id
+                    WHERE r.id IS NOT NULL
+                    AND (%s >= r.data_rozpoczecia AND %s < r.data_zakonczenia)
+                )
+                AND h.miasto = %s
+                GROUP BY h.id
+            """
+            params = [checkin, checkin, checkout, checkout, city]
+
+            hotele_id = [h.id for h in Rezerwacja.objects.raw(sql, params)]
+            hotele = Hotel.objects.filter(pk__in=hotele_id)
+
+
     return render(request, 'reservedme/index.html', {'hotele': hotele})
 
 def kontakt(request):
@@ -456,18 +496,6 @@ def hotel_view(request):
 
 
     return render(request, 'reservedme/hotel.html', {'hotel': hotel, 'pokoje': pokoje, 'wyniki': wyniki, 'daty': daty})
-
-
-def search_rooms(request):
-    if request.method == 'GET':
-        checkin = request.GET['checkin']
-        checkout = request.GET['checkout']
-        guests = request.GET['guests']
-        rooms = request.GET['rooms']
-
-
-        q = f''
-    return redirect('hotel_view')
 
 def book_room(request):
     if request.method == 'POST':

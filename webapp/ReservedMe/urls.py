@@ -39,8 +39,7 @@ urlpatterns = [
     path('display_rooms', views.display_rooms, name='display_rooms'), # wyswietlanie pokoi wybranego hotelu
     path('remove_room', views.remove_room, name='remove_room'), # usuwanie pokoju
     path('edit_hotel', views.edit_hotel, name='edit_hotel'), # edytowanie informacji o hotelu
-   
 
-    path('search_rooms', views.search_rooms, name='search_rooms'), # filtrowanie pokoi w hotelu
+
     path('book_room', views.book_room, name='book_room'), # rezerwacja pokoju
 ]
