@@ -111,6 +111,7 @@ def my_reservations_view(request):
             JOIN ReservedMe_Hotel h ON r.hotel_id = h.id
             JOIN ReservedMe_Pokoj p ON r.pokoj_id = p.id
             WHERE r.uzytkownik_id = %s
+            ORDER BY r.data_wykonania DESC
             """
     params = [user]
     
@@ -136,6 +137,7 @@ def my_reservations_view(request):
         JOIN ReservedMe_Pokoj p ON r.pokoj_id = p.id
         JOIN ReservedMe_CustomUser u ON r.uzytkownik_id = u.id
         WHERE h.uzytkownik_id = %s
+        ORDER BY r.data_wykonania DESC
     """
 
     params1 = [user]  
